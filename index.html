@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>二维字母词表</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <h2>联想词记忆表</h2>
+
+    <button onclick="refreshTable()">刷新表格</button>
+    <button onclick="loadData()">加载数据</button>
+    <!-- <button onclick="loadSampleData()">加载示例数据</button> -->
+    <button onclick="clearAllData()" style="color: red;">清空所有数据</button>
+    <button onclick="toggleTable()">显示/隐藏表格</button>
+    <button onclick="downloadData()">下载当前数据</button>
+    <input type="file" id="fileInput" style="display:none" accept=".json" onchange="importData(event)" />
+    <button onclick="document.getElementById('fileInput').click()">导入本地文件</button>
+
+
+
+    <h3>训练模式</h3>
+    <p id="currentCode">当前编码：--</p>
+    <input type="text" id="userInput" placeholder="请输入对应词汇" />
+    <button onclick="submitAnswer()">提交</button>
+    <button onclick="nextCode()">下一题</button>
+    <p id="resultOutput"></p>
+
+    <table id="letterTable"></table>
+
+
+    <!-- 
+    <h3>SampleTable</h3>
+    <table id="sampleTable"></table> -->
+
+    <script src="js/script.js"></script>
+
+</body>
+
+</html>

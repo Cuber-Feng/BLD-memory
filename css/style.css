@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 10px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th,
+td {
+    border: 1px solid #888;
+    padding: 6px 10px;
+    text-align: center;
+    min-width: 40px;
+}
+
+th {
+    background-color: #ddd;
+}
+
+td.empty {
+    color: #bbb;
+}
+
+#letterTable {
+    display: none;
+}
