@@ -3,38 +3,51 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>二维字母词表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 响应式核心 -->
+    <title>盲拧很简单</title>
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
+    <header>
+        <h1>联想词记忆练习</h1>
+    </header>
+    <main>
+        <h2 class="title">操作</h2>
+        <div id="operationBlock">
+            <div class="button-group">
+                <button onclick="downloadData()">下载当前联想词文件</button>
+                <button onclick="document.getElementById('fileInput').click()">导入本地联想词</button>
+                <button onclick="clearAllData()" style="color: red;">清空所有联想词</button>
+            </div>
+            <input type="file" id="fileInput" style="display:none" accept=".json" onchange="importData(event)" />
+        </div>
 
-    <h2>联想词记忆表</h2>
+        <h2 class="title">训练</h2>
+        <div id="trainingBlock">
+            <p id="currentCode">当前编码：--</p>
+            <input type="text" id="userInput" placeholder="请输入对应词汇" />
+            <div class="button-group">
+                <button onclick="submitAnswer()">提交</button>
+                <button onclick="nextCode()">下一题</button>
+            </div>
+            <p id="resultOutput"></p>
+        </div>
 
-    <button onclick="refreshTable()">刷新表格</button>
-    <button onclick="loadData()">加载数据</button>
-    <!-- <button onclick="loadSampleData()">加载示例数据</button> -->
-    <button onclick="clearAllData()" style="color: red;">清空所有数据</button>
-    <button onclick="toggleTable()">显示/隐藏表格</button>
-    <button onclick="downloadData()">下载当前数据</button>
-    <input type="file" id="fileInput" style="display:none" accept=".json" onchange="importData(event)" />
-    <button onclick="document.getElementById('fileInput').click()">导入本地文件</button>
-
-
-
-    <h3>训练模式</h3>
-    <p id="currentCode">当前编码：--</p>
-    <input type="text" id="userInput" placeholder="请输入对应词汇" />
-    <button onclick="submitAnswer()">提交</button>
-    <button onclick="nextCode()">下一题</button>
-    <p id="resultOutput"></p>
-
-    <table id="letterTable"></table>
+    </main>
 
 
-    <!-- 
-    <h3>SampleTable</h3>
-    <table id="sampleTable"></table> -->
+    <h2 class="title">联想词对应表</h2>
+    <div id="tableBlock">
+        <button onclick="toggleTable()">显示/隐藏表格</button>
+        <button onclick="refreshTable()">刷新表格</button>
+        <!-- <button onclick="loadData()">加载数据</button> -->
+        <!-- <button onclick="loadSampleData()">加载示例数据</button> -->
+        <div id="tableContainer">
+            <table id="letterTable"></table>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 
