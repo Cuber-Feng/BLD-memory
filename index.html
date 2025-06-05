@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 响应式核心 -->
     <title>盲拧很简单</title>
-    <link rel="stylesheet" href="./css/style.css?20250606">
+    <link rel="stylesheet" href="./css/style.css?202506060024">
 
 </head>
 
@@ -27,10 +27,10 @@
         <h2 class="title">训练</h2>
         <div id="trainingBlock">
             <p id="currentCode">当前编码：--</p>
-            <input type="text" id="userInput" placeholder="请输入对应词汇" />
+            <input type="text" id="userInput" placeholder="请输入对应词汇" onkeydown="checkEnter(event)"/>
             <div class="button-group">
                 <button onclick="submitAnswer()">提交</button>
-                <button onclick="nextCode()">下一题</button>
+                <button onclick="nextCode()">跳过</button>
             </div>
             <p id="resultOutput"></p>
         </div>

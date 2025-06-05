@@ -158,6 +158,7 @@ window.onload = () => {
     const data = loadData();
     renderTable(data);  // 构建好内容
     document.getElementById("letterTable").style.display = "none";  // 隐藏
+    nextCode();
 }
 
 // 显示/隐藏表格
@@ -185,6 +186,7 @@ function nextCode() {
     document.getElementById("resultOutput").textContent = "";
 }
 
+// 提交答案
 function submitAnswer() {
     if (!currentCode) {
         alert("请先点击『下一题』生成编码");
@@ -217,14 +219,19 @@ function submitAnswer() {
     const updated = data[currentCode];
     const displayList = Array.isArray(updated) ? updated : [updated];
     document.getElementById("resultOutput").textContent =
-        `【${currentCode}】已记录的词汇：${displayList.join("，")}`;
-
+        `[${currentCode}]已记录的联想词：${displayList.join("，")}`;
+    document.getElementById("userInput").value = "";
+    nextCode();
     // 可选：刷新表格（如果显示中）
     if (document.getElementById("letterTable").style.display !== "none") {
         renderTable(data);
     }
 }
-
+function checkEnter(event) {
+    if (event.key === "Enter") {
+        submitAnswer();
+    }
+}
 function clearAllData() {
     if (confirm("确定要清空所有数据吗？此操作不可恢复！")) {
         localStorage.removeItem("letterTableData"); // 删除数据
