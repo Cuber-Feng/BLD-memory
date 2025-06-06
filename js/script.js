@@ -123,16 +123,16 @@ function nextCode(hitFlag) {
     let ansStatus = null;
     switch (hitFlag) {
         case 0:
-            ansStatus = `<b><i style="color: #27548A">create</i></b>`;
+            ansStatus = `<b style="color: #27548A">create</b>`;
             break;
         case 1:
-            ansStatus = `<b><i style="color: #727D73">hit</i></b>`;
+            ansStatus = `<b style="color: #727D73">hit</b>`;
             break;
         case 2:
-            ansStatus = `<b><i style="color: #ECB159">add</i></b>`;
+            ansStatus = `<b style="color: #ECB159">add</b>`;
             break;
         case 3:
-            ansStatus = `<b><i style="color: #2b2b2b">skip</i></b>`;
+            ansStatus = `<b style="color: #2b2b2b">skip</b>`;
             break;
         default:
             ansStatus = `<b>error</b>`;
