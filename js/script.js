@@ -15,17 +15,6 @@ function loadData() {
     return {};
 }
 
-// function loadSampleData() {
-//     const raw = localStorage.getItem("sampleData");
-//     if (raw) {
-//         try {
-//             return JSON.parse(raw);
-//         } catch {
-//             return {};
-//         }
-//     }
-//     return {};
-// }
 
 function saveData(data) {
     localStorage.setItem("letterTableData", JSON.stringify(data));
@@ -83,75 +72,11 @@ function renderTable(data) {
     table.appendChild(tbody);
 }
 
-// 渲染示例表格
-// function renderSampleTable(data) {
-//     const table = document.getElementById("SampleTable");
-//     table.innerHTML = "";
-
-//     // 表头空格 + 26列字母
-//     const thead = document.createElement("thead");
-//     const headerRow = document.createElement("tr");
-//     headerRow.appendChild(document.createElement("th")); // 左上角空白
-
-//     letters.forEach(ch => {
-//         const th = document.createElement("th");
-//         th.textContent = ch;
-//         headerRow.appendChild(th);
-//     });
-//     thead.appendChild(headerRow);
-//     table.appendChild(thead);
-
-//     // tbody 内容
-//     const tbody = document.createElement("tbody");
-//     letters.forEach(rowChar => {
-//         const tr = document.createElement("tr");
-//         // 行号（保持不变）
-//         const th = document.createElement("th");
-//         th.textContent = rowChar;
-//         tr.appendChild(th);
-
-//         letters.forEach(colChar => {
-//             const td = document.createElement("td");
-//             // key 顺序对调
-//             const key = colChar + rowChar;
-//             let val = data[key];
-//             if (Array.isArray(val) && val.length > 0) {
-//                 val = val[0];
-//             }
-//             if (typeof val !== "string") {
-//                 val = "";
-//                 td.classList.add("empty");
-//             }
-//             td.textContent = val;
-//             tr.appendChild(td);
-//         });
-//         tbody.appendChild(tr);
-//     });
-
-//     table.appendChild(tbody);
-// }
-
 // 刷新表格显示
 function refreshTable() {
     const data = loadData();
     renderTable(data);
 }
-
-// 加载示例数据
-// function loadSampleData() {
-//     const sampleData = {};
-//     letters.forEach(r => {
-//         letters.forEach(c => {
-//             sampleData[r + c] = null;
-//         });
-//     });
-//     sampleData["AB"] = "安倍";
-//     sampleData["CD"] = ["光碟", "光盘"];
-//     sampleData["DC"] = "单词";
-
-//     saveSampleData(sampleData);
-//     refreshSampleTable();
-// }
 
 // 页面加载时自动加载表格
 window.onload = () => {
@@ -174,17 +99,34 @@ function toggleTable() {
     }
 }
 
-
 let currentCode = null;
+let lastCode = null;
 
 function nextCode() {
+    lastCode = currentCode;
+
     const r = letters[Math.floor(Math.random() * 26)];
     const c = letters[Math.floor(Math.random() * 26)];
     currentCode = r + c;
-    document.getElementById("currentCode").textContent = `当前编码：${currentCode}`;
+
+    // 显示当前 code
+    document.getElementById("currentCode").textContent = `当前: ${currentCode}`;
+
+    // 获取 lastCode 的联想词
+    const data = loadData();
+    let displayList = [];
+    if (lastCode && data[lastCode]) {
+        const entry = data[lastCode];
+        displayList = Array.isArray(entry) ? entry : [entry];
+    }
+
+    document.getElementById("lastCode").textContent =
+        lastCode ? `上一个: ${lastCode} (${displayList.join(", ")})` : "";
+
+    // 清空输入框
     document.getElementById("userInput").value = "";
-    document.getElementById("resultOutput").textContent = "";
 }
+
 
 // 提交答案
 function submitAnswer() {
@@ -195,7 +137,7 @@ function submitAnswer() {
 
     const input = document.getElementById("userInput").value.trim();
     if (!input) {
-        alert("请输入词汇！");
+        nextCode();
         return;
     }
 
@@ -204,29 +146,30 @@ function submitAnswer() {
 
     if (Array.isArray(existing)) {
         if (!existing.includes(input)) {
-            existing.push(input);
+            existing.unshift(input); // 插入到开头
         }
     } else if (typeof existing === "string") {
         if (existing !== input) {
-            data[currentCode] = [existing, input];
+            data[currentCode] = [input, existing]; // input 在前
         }
     } else {
         data[currentCode] = [input];
     }
 
-    saveData(data);
 
-    const updated = data[currentCode];
-    const displayList = Array.isArray(updated) ? updated : [updated];
-    document.getElementById("resultOutput").textContent =
-        `[${currentCode}]已记录的联想词：${displayList.join("，")}`;
+    saveData(data);
+    
+    // clear input content
     document.getElementById("userInput").value = "";
     nextCode();
+
+
     // 可选：刷新表格（如果显示中）
     if (document.getElementById("letterTable").style.display !== "none") {
         renderTable(data);
     }
 }
+
 function checkEnter(event) {
     if (event.key === "Enter") {
         submitAnswer();

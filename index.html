@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 响应式核心 -->
     <title>盲拧很简单</title>
     <link rel="stylesheet" href="./css/style.css?202506060024">
+    <link rel="icon" type="image/x-icon" href="./icon/icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon/icon.png">
 
 </head>
 
@@ -14,40 +16,65 @@
         <h1>联想词记忆练习</h1>
     </header>
     <main>
-        <h2 class="title">操作</h2>
-        <div id="operationBlock">
+        <div id="operationBlock" class="blocks">
+            <h2 class="title">联想词文件</h2>
+
             <div class="button-group">
-                <button onclick="downloadData()">下载当前联想词文件</button>
-                <button onclick="document.getElementById('fileInput').click()">导入本地联想词</button>
-                <button onclick="clearAllData()" style="color: red;">清空所有联想词</button>
+                <button onclick="downloadData()">导出</button>
+                <button onclick="document.getElementById('fileInput').click()">导入</button>
             </div>
             <input type="file" id="fileInput" style="display:none" accept=".json" onchange="importData(event)" />
         </div>
 
-        <h2 class="title">训练</h2>
-        <div id="trainingBlock">
-            <p id="currentCode">当前编码：--</p>
-            <input type="text" id="userInput" placeholder="请输入对应词汇" onkeydown="checkEnter(event)"/>
+        <div id="trainingBlock" class="blocks">
+            <h2 class="title">训练</h2>
+            <p id="lastCode">上一个: </p>
+            <p id="currentCode">当前:--</p>
+            <input type="text" id="userInput" placeholder="请输入对应联想词" onkeydown="checkEnter(event)" autocomplete="off" />
             <div class="button-group">
                 <button onclick="submitAnswer()">提交</button>
                 <button onclick="nextCode()">跳过</button>
             </div>
-            <p id="resultOutput"></p>
         </div>
 
+        <div id="tableBlock" class="blocks">
+            <h2 class="title">联想词对应表</h2>
+
+            <button onclick="toggleTable()">显示/隐藏</button>
+            <button onclick="refreshTable()">刷新</button>
+            <button onclick="clearAllData()" style="background-color: rgba(255, 0, 0, 0.605);">清空</button>
+        </div>
     </main>
 
-
-    <h2 class="title">联想词对应表</h2>
-    <div id="tableBlock">
-        <button onclick="toggleTable()">显示/隐藏表格</button>
-        <button onclick="refreshTable()">刷新表格</button>
-        <!-- <button onclick="loadData()">加载数据</button> -->
-        <!-- <button onclick="loadSampleData()">加载示例数据</button> -->
-        <div id="tableContainer">
-            <table id="letterTable"></table>
-        </div>
+    <div id="tableContainer">
+        <table id="letterTable"></table>
     </div>
+
+    <footer>
+        <div class="blocks">
+            <h2 class="title">关于</h2>
+            <table>
+                <tr>
+                    <th>最新更新: </th>
+                    <td>Jun-06, 2025</td>
+                </tr>
+                <tr>
+                    <th>我的WCA主页: </th>
+                    <td><a href="https://www.worldcubeassociation.org/persons/2017FENG35" target="_blank">2017FENG35</a></td>
+                </tr>
+                <tr>
+                    <th>我的B站: </th>
+                    <td><a href="https://space.bilibili.com/1035959192?spm_id_from=333.1007.0.0" target="_blank">溢水1735</a></td>   
+                </tr>
+                <tr>
+                    <th>报错: </th>
+                    <td><a href="https://github.com/Cuber-Feng/BLD-memory/issues/new?title=Bug%20Report&body=Please%20describe%20the%20issue..." target="_blank">GitHub Issue</a></td>
+                </tr>
+            </table>
+        </div>
+        <div id="occu" style="height: 15vh;"></div>
+        <p style="text-align: center;">© 2025 Maple Feng. All rights reserved.</p>
+    </footer>
 
     <script src="js/script.js"></script>
 

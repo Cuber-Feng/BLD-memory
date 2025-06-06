@@ -1,87 +1,154 @@
+html {
+    background-color: #F1F0E8;
+    color: #2b2b2b;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    padding: 10px;
+    font-family: serif, Arial, Helvetica, sans-serif, sans-serif;
+    margin: 0;
+}
+
+
+.title {
+    margin: 0 0 0 0;
+    padding: 0 0 0.5rem 0.5rem;
+    color: #2b2b2b;
+}
+
+.blocks {
+    padding: 1rem;
+    background-color: #E5E1DA;
+    margin: 0 auto 1rem auto;
+    max-width: 300px;
 }
 
 header {
     text-align: center;
-    background-color: #2b2b2b;
-    color: white;
+    color: #2b2b2b;
     border-radius: 10rem;
-    padding: 0.5rem;
+    padding: 1rem 0 0 0;
     margin: 0 auto;
     max-width: 20rem;
 }
 
-button{
+button {
     padding: 0.3rem;
-    margin: 0.3rem 0.3rem 0.3rem 0rem;
+    margin: 0rem 0.3rem 0.3rem 0rem;
+    padding: 0.5rem 1rem;
+    background-color: #89A8B2;
+    border: none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#currentCode {
+    margin: 0;
+    padding: 0 0 0.5rem 0;
 }
 
 main {
     margin: 0 auto;
     max-width: 1000px;
-}
-
-#operationBlock, #trainingBlock, #tableBlock{
-    border: 2px solid #2b2b2b;
-    padding: 0.5rem;
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-}
-
-.title{
-    margin: 1rem 0 0 0;
-    padding: 0.2rem 0;
-    background-color: #2b2b2b;
-    color: white;
-    text-align: center;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+    padding: 10px;
 }
 
 #tableContainer {
     overflow-x: auto;
 }
 
-table {
-    border-collapse: collapse;
+/* 简单响应式样式 */
+
+input {
+    font-size: 16px;
+    /* 至少16px，防止iOS自动缩放 */
+    padding: 12px;
+    margin: 0 0 1rem 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    background-color: #fff;
+    font-family: inherit;
 }
 
-th,
-td {
-    border: 1px solid #888;
-    padding: 6px 10px;
-    text-align: center;
-    min-width: 40px;
-}
-
-th {
-    background-color: #ddd;
-}
-
-td.empty {
-    color: #bbb;
+input:focus {
+    border-color: #007aff;
+    /* 蓝色高亮 */
+    box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
 }
 
 #letterTable {
     display: none;
 }
 
-
-/* 简单响应式样式 */
-
-
-input[type="text"] {
-    max-width: 400px;
-    margin: 0rem 0;
-    height: 2rem;
+#tableContainer {
+  width: 98vw;
+  max-width: 98vw;
+  max-height: 75vh;              /* 限高触发纵向滚动 */
+  margin: 0 auto 1rem auto;
+  overflow: auto;                 /* 横纵向都允许滚动 */
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
 }
 
 #letterTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    overflow-x: auto;
-    display: block;
+  border-collapse: collapse;
+  width: max-content;
+  min-width: 100%;
+  table-layout: fixed;
+}
+
+#letterTable th,
+#letterTable td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #F1F0E8;
+}
+
+/* 固定首行 */
+#letterTable thead th {
+  position: sticky;
+  top: 0;
+  background-color: #75919b;
+  color: #fff;
+  z-index: 3;
+}
+
+/* 固定首列 */
+#letterTable th:first-child {
+  position: sticky;
+  left: 0;
+  color: #fff;
+  background-color: #75919b;
+  z-index: 2;
+}
+
+/* 左上角交叉单元格 */
+#letterTable thead th:first-child {
+  z-index: 4;
+}
+
+/* 空内容样式 */
+#letterTable td.empty {
+  background-color: #F1F0E8;
+  color: #bbb;
+}
+
+
+footer table{
+    color: #2b2b2b;
+}
+footer table th{
+    text-align: right;
+    font-weight: 500;
+    padding: 0 0 0.4rem 0;
+}
+footer table td {
+    padding: 0 0 0.4rem 1rem;
 }
