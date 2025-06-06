@@ -76,7 +76,7 @@ input {
 }
 
 input:focus {
-    border-color: #007aff;
+    border-color: #51829B;
     /* 蓝色高亮 */
     box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
 }

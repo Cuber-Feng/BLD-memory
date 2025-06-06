@@ -20,10 +20,6 @@ function saveData(data) {
     localStorage.setItem("letterTableData", JSON.stringify(data));
 }
 
-// function saveSampleData(data) {
-//     localStorage.setItem("sampleData", JSON.stringify(data));
-// }
-
 // 渲染表格
 function renderTable(data) {
     const table = document.getElementById("letterTable");
@@ -101,16 +97,20 @@ function toggleTable() {
 
 let currentCode = null;
 let lastCode = null;
+let hitFlag = 0; // 标记这道题的回答情况(0: create, 1: hit, 2: add, 3: skip)
 
-function nextCode() {
+function nextCode(hitFlag) {
     lastCode = currentCode;
 
     const r = letters[Math.floor(Math.random() * 26)];
     const c = letters[Math.floor(Math.random() * 26)];
     currentCode = r + c;
 
+    // Testing
+    //currentCode = "AD";
+
     // 显示当前 code
-    document.getElementById("currentCode").textContent = `当前: ${currentCode}`;
+    document.getElementById("currentCode").innerHTML = `当前: <b>${currentCode}</b>`;
 
     // 获取 lastCode 的联想词
     const data = loadData();
@@ -120,54 +120,86 @@ function nextCode() {
         displayList = Array.isArray(entry) ? entry : [entry];
     }
 
-    document.getElementById("lastCode").textContent =
-        lastCode ? `上一个: ${lastCode} (${displayList.join(", ")})` : "";
+    let ansStatus = null;
+    switch (hitFlag) {
+        case 0:
+            ansStatus = `<b><i style="color: #27548A">create</i></b>`;
+            break;
+        case 1:
+            ansStatus = `<b><i style="color: #727D73">hit</i></b>`;
+            break;
+        case 2:
+            ansStatus = `<b><i style="color: #ECB159">add</i></b>`;
+            break;
+        case 3:
+            ansStatus = `<b><i style="color: #2b2b2b">skip</i></b>`;
+            break;
+        default:
+            ansStatus = `<b>error</b>`;
+            break;
+    }
+
+    document.getElementById("lastCode").innerHTML =
+        lastCode ? `上一个: <b>${lastCode}</b> (${displayList.join(", ")}) ${ansStatus}` : "";
 
     // 清空输入框
     document.getElementById("userInput").value = "";
 }
 
+function goHead(arr, val) { // 把数组arr里的val提到最前面
+    const i = arr.indexOf(val);
+    if (i !== -1 && i !== 0) {
+        [arr[i], arr[0]] = [arr[0], arr[i]];
+    }
+}
 
 // 提交答案
 function submitAnswer() {
     if (!currentCode) {
-        alert("请先点击『下一题』生成编码");
+        alert("彩蛋");
         return;
     }
 
     const input = document.getElementById("userInput").value.trim();
     if (!input) {
-        nextCode();
+        nextCode(3);
         return;
     }
 
     const data = loadData();
     const existing = data[currentCode];
+    let hflag = -1;
 
-    if (Array.isArray(existing)) {
-        if (!existing.includes(input)) {
-            existing.unshift(input); // 插入到开头
+    if (Array.isArray(existing)) { // 判断 exsting 是否是一个数组
+        if (!existing.includes(input)) { // 判断数组中是否已包含 input
+            existing.unshift(input); // 如果数组里面没有你输入的联想词, 就插入到开头
+            hflag = 2;
+            if (existing.length > 3) { // 让一个编码对应的词汇不超过三个
+                existing.pop();
+            }
+        } else { // 数组中有这个input
+            goHead(existing, input);
+            hflag = 1;
         }
-    } else if (typeof existing === "string") {
+    } else if (typeof existing === "string") { //理论上就算只有一个联想词, 也是一个元素的数组, 所以用不到这个
         if (existing !== input) {
             data[currentCode] = [input, existing]; // input 在前
+            hflag = 2;
         }
-    } else {
+    } else { // 第一次输入该编码的联想词
         data[currentCode] = [input];
+        hflag = 0;
     }
-
 
     saveData(data);
-    
+
     // clear input content
     document.getElementById("userInput").value = "";
-    nextCode();
-
+    nextCode(hflag);
 
     // 可选：刷新表格（如果显示中）
-    if (document.getElementById("letterTable").style.display !== "none") {
-        renderTable(data);
-    }
+    renderTable(data);
+
 }
 
 function checkEnter(event) {
