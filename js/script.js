@@ -139,28 +139,25 @@ function nextCode(hitFlag) {
             break;
         case 'ff':
             a = Math.floor(Math.random() * 21);
-            b = Math.floor(Math.random() * 21);
-            while (a / 3 === b / 3) {
+            do {
                 b = Math.floor(Math.random() * 21);
-            }
+            } while (a / 3 === b / 3);
             r = ffLetters[a];
             c = ffLetters[b];
             break;
         case 'corner-chichu':
             a = Math.floor(Math.random() * 21);
-            b = Math.floor(Math.random() * 21);
-            while (a / 3 === b / 3) {
+            do {
                 b = Math.floor(Math.random() * 21);
-            }
+            } while (a / 3 === b / 3);
             r = chichuLettersCorner[a];
             c = chichuLettersCorner[b];
             break;
         case 'edge-chichu':
             a = Math.floor(Math.random() * 22);
-            b = Math.floor(Math.random() * 22);
-            while (a / 2 === b / 2) {
+            do {
                 b = Math.floor(Math.random() * 22);
-            }
+            } while (a / 2 === b / 2);
             r = chichuLettersEdge[a];
             c = chichuLettersEdge[b];
             break;
