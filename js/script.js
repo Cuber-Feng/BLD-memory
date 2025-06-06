@@ -99,11 +99,79 @@ let currentCode = null;
 let lastCode = null;
 let hitFlag = 0; // 标记这道题的回答情况(0: create, 1: hit, 2: add, 3: skip)
 
+const ffLetters = [
+    'A', 'B', 'C',
+    'D', 'K', 'F',
+    'G', 'H', 'J',
+    'W', 'M', 'N',
+    'L', 'P', 'Q',
+    'R', 'S', 'T',
+    'X', 'Y', 'Z'];
+
+const chichuLettersCorner = [
+    'A', 'B', 'C',
+    'D', 'E', 'F',
+    'G', 'H', 'I',
+    'W', 'M', 'N',
+    'O', 'P', 'Q',
+    'R', 'S', 'T',
+    'X', 'Y', 'Z'];
+
+const chichuLettersEdge = [
+    'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+    'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
+
 function nextCode(hitFlag) {
     lastCode = currentCode;
 
-    const r = letters[Math.floor(Math.random() * 26)];
-    const c = letters[Math.floor(Math.random() * 26)];
+    // 模式选择
+    const selectElement = document.getElementById('modes');
+    const currentMode = selectElement.value;
+
+    let r, c; // for letters
+    let a, b; // for index of letters
+    switch (currentMode) {
+        case 'general':
+            a = Math.floor(Math.random() * 26);
+            b = Math.floor(Math.random() * 26);
+            r = letters[a];
+            c = letters[b];
+            break;
+        case 'ff':
+            a = Math.floor(Math.random() * 21);
+            b = Math.floor(Math.random() * 21);
+            while (a / 3 === b / 3) {
+                b = Math.floor(Math.random() * 21);
+            }
+            r = ffLetters[a];
+            c = ffLetters[b];
+            break;
+        case 'corner-chichu':
+            a = Math.floor(Math.random() * 21);
+            b = Math.floor(Math.random() * 21);
+            while (a / 3 === b / 3) {
+                b = Math.floor(Math.random() * 21);
+            }
+            r = chichuLettersCorner[a];
+            c = chichuLettersCorner[b];
+            break;
+        case 'edge-chichu':
+            a = Math.floor(Math.random() * 22);
+            b = Math.floor(Math.random() * 22);
+            while (a / 2 === b / 2) {
+                b = Math.floor(Math.random() * 22);
+            }
+            r = chichuLettersEdge[a];
+            c = chichuLettersEdge[b];
+            break;
+        default:
+            a = Math.floor(Math.random() * 26);
+            b = Math.floor(Math.random() * 26);
+            r = letters[a];
+            c = letters[b];
+            break;
+    }
+
     currentCode = r + c;
 
     // Testing

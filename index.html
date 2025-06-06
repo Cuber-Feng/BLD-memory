@@ -28,6 +28,13 @@
 
         <div id="trainingBlock" class="blocks">
             <h2 class="title">训练</h2>
+            <label for="modes">模式:</label>
+            <select id="modes" name="modes">
+                <option value="general">全字母</option>
+                <option value="ff">角块 (枫)</option>
+                <option value="corner-chichu">角块 (彳亍)</option>
+                <option value="edge-chichu">棱块 (彳亍)</option>
+            </select>
             <p id="lastCode">上一个: </p>
             <p id="currentCode">当前:--</p>
             <input type="text" id="userInput" placeholder="请输入对应联想词" onkeydown="checkEnter(event)" autocomplete="off" />
@@ -60,15 +67,18 @@
                 </tr>
                 <tr>
                     <th>我的WCA主页: </th>
-                    <td><a href="https://www.worldcubeassociation.org/persons/2017FENG35" target="_blank">2017FENG35</a></td>
+                    <td><a href="https://www.worldcubeassociation.org/persons/2017FENG35" target="_blank">2017FENG35</a>
+                    </td>
                 </tr>
                 <tr>
                     <th>我的B站: </th>
-                    <td><a href="https://space.bilibili.com/1035959192?spm_id_from=333.1007.0.0" target="_blank">溢水1735</a></td>   
+                    <td><a href="https://space.bilibili.com/1035959192?spm_id_from=333.1007.0.0"
+                            target="_blank">溢水1735</a></td>
                 </tr>
                 <tr>
                     <th>报错: </th>
-                    <td><a href="https://github.com/Cuber-Feng/BLD-memory/issues/new?title=Bug%20Report&body=Please%20describe%20the%20issue..." target="_blank">GitHub Issue</a></td>
+                    <td><a href="https://github.com/Cuber-Feng/BLD-memory/issues/new?title=Bug%20Report&body=Please%20describe%20the%20issue..."
+                            target="_blank">GitHub Issue</a></td>
                 </tr>
             </table>
         </div>

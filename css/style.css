@@ -43,6 +43,22 @@ button {
     font-size: 16px;
 }
 
+#modes {
+    touch-action: manipulation;
+    font-size: 16px;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #e2b577;
+    color:white;
+    border-radius: 0;
+
+}
+
+option{
+    background-color: #F1F0E8;
+    color: #2b2b2b;
+}
+
 #currentCode {
     margin: 0;
     padding: 0 0 0.5rem 0;
@@ -86,69 +102,73 @@ input:focus {
 }
 
 #tableContainer {
-  width: 98vw;
-  max-width: 98vw;
-  max-height: 75vh;              /* 限高触发纵向滚动 */
-  margin: 0 auto 1rem auto;
-  overflow: auto;                 /* 横纵向都允许滚动 */
-  -webkit-overflow-scrolling: touch;
-  border-collapse: collapse;
+    width: 98vw;
+    max-width: 98vw;
+    max-height: 75vh;
+    /* 限高触发纵向滚动 */
+    margin: 0 auto 1rem auto;
+    overflow: auto;
+    /* 横纵向都允许滚动 */
+    -webkit-overflow-scrolling: touch;
+    border-collapse: collapse;
 }
 
 #letterTable {
-  border-collapse: collapse;
-  width: max-content;
-  min-width: 100%;
-  table-layout: fixed;
+    border-collapse: collapse;
+    width: max-content;
+    min-width: 100%;
+    table-layout: fixed;
 }
 
 #letterTable th,
 #letterTable td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #F1F0E8;
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #F1F0E8;
 }
 
 /* 固定首行 */
 #letterTable thead th {
-  position: sticky;
-  top: 0;
-  background-color: #75919b;
-  color: #fff;
-  z-index: 3;
+    position: sticky;
+    top: 0;
+    background-color: #75919b;
+    color: #fff;
+    z-index: 3;
 }
 
 /* 固定首列 */
 #letterTable th:first-child {
-  position: sticky;
-  left: 0;
-  color: #fff;
-  background-color: #75919b;
-  z-index: 2;
+    position: sticky;
+    left: 0;
+    color: #fff;
+    background-color: #75919b;
+    z-index: 2;
 }
 
 /* 左上角交叉单元格 */
 #letterTable thead th:first-child {
-  z-index: 4;
+    z-index: 4;
 }
 
 /* 空内容样式 */
 #letterTable td.empty {
-  background-color: #F1F0E8;
-  color: #bbb;
+    background-color: #F1F0E8;
+    color: #bbb;
 }
 
 
-footer table{
+footer table {
     color: #2b2b2b;
 }
-footer table th{
+
+footer table th {
     text-align: right;
     font-weight: 500;
     padding: 0 0 0.4rem 0;
 }
+
 footer table td {
     padding: 0 0 0.4rem 1rem;
 }
