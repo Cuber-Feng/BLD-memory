@@ -1,4 +1,28 @@
 const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
+const ffLetters = [
+    'A', 'B', 'C',
+    'D', 'K', 'F',
+    'G', 'H', 'J',
+    'W', 'M', 'N',
+    'L', 'P', 'Q',
+    'R', 'S', 'T',
+    'X', 'Y', 'Z'];
+
+const chichuLettersCorner = [
+    'A', 'B', 'C',
+    'D', 'E', 'F',
+    'G', 'H', 'I',
+    'W', 'M', 'N',
+    'O', 'P', 'Q',
+    'R', 'S', 'T',
+    'X', 'Y', 'Z'];
+
+const chichuLettersEdge = [
+    'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+    'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
+
+const chichuLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+    'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
 
 // 数据结构：key = 两个字母，如 "AB"，value 可以是字符串或数组
 // 使用 localStorage 来存储数据，key: "letterTableData"
@@ -30,7 +54,33 @@ function renderTable(data) {
     const headerRow = document.createElement("tr");
     headerRow.appendChild(document.createElement("th")); // 左上角空白
 
-    letters.forEach(ch => {
+    // 模式选择
+    const selectElement = document.getElementById('modes');
+    const currentMode = selectElement.value;
+
+    let l = letters;
+
+    switch (currentMode) {
+        case 'general':
+            l = letters;
+            break;
+        case 'chichu':
+            l = chichuLetters;
+            break;
+        case 'ff':
+            l = ffLetters;
+            break;
+        case 'corner-chichu':
+            l = chichuLettersCorner;
+            break;
+        case 'edge-chichu':
+            l = chichuLettersEdge;
+            break;
+        default:
+            break;
+    }
+
+    l.forEach(ch => {
         const th = document.createElement("th");
         th.textContent = ch;
         headerRow.appendChild(th);
@@ -40,14 +90,14 @@ function renderTable(data) {
 
     // tbody 内容
     const tbody = document.createElement("tbody");
-    letters.forEach(rowChar => {
+    l.forEach(rowChar => {
         const tr = document.createElement("tr");
         // 行号（保持不变）
         const th = document.createElement("th");
         th.textContent = rowChar;
         tr.appendChild(th);
 
-        letters.forEach(colChar => {
+        l.forEach(colChar => {
             const td = document.createElement("td");
             // key 顺序对调
             const key = colChar + rowChar;
@@ -93,33 +143,12 @@ function toggleTable() {
     } else {
         table.style.display = "none";
     }
+    refreshTable();
 }
 
 let currentCode = null;
 let lastCode = null;
 let hitFlag = 0; // 标记这道题的回答情况(0: create, 1: hit, 2: add, 3: skip)
-
-const ffLetters = [
-    'A', 'B', 'C',
-    'D', 'K', 'F',
-    'G', 'H', 'J',
-    'W', 'M', 'N',
-    'L', 'P', 'Q',
-    'R', 'S', 'T',
-    'X', 'Y', 'Z'];
-
-const chichuLettersCorner = [
-    'A', 'B', 'C',
-    'D', 'E', 'F',
-    'G', 'H', 'I',
-    'W', 'M', 'N',
-    'O', 'P', 'Q',
-    'R', 'S', 'T',
-    'X', 'Y', 'Z'];
-
-const chichuLettersEdge = [
-    'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
-    'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
 
 // 辅助函数, 判断两个数在整除一个数之后结果是否相等
 function inSameRange(a, b, range) {
@@ -141,6 +170,12 @@ function nextCode(hitFlag) {
             b = Math.floor(Math.random() * 26);
             r = letters[a];
             c = letters[b];
+            break;
+        case 'chichu':
+            a = Math.floor(Math.random() * 24);
+            b = Math.floor(Math.random() * 24);
+            r = chichuLetters[a];
+            c = chichuLetters[b];
             break;
         case 'ff':
             a = Math.floor(Math.random() * 21);
@@ -283,9 +318,10 @@ function submitAnswer() {
 
 }
 
-// 切换mode的时候自动下一题
+// 切换mode的时候自动下一题 + 刷新表格
 document.getElementById('modes').addEventListener('change', function (event) {
     nextCode(4);
+    refreshTable();
 });
 
 function checkEnter(event) {
