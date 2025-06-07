@@ -121,6 +121,11 @@ const chichuLettersEdge = [
     'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
     'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
 
+// 辅助函数, 判断两个数在整除一个数之后结果是否相等
+function inSameRange(a, b, range) {
+    return Math.floor(a / range) === Math.floor(b / range);
+}
+
 function nextCode(hitFlag) {
     lastCode = currentCode;
 
@@ -141,7 +146,7 @@ function nextCode(hitFlag) {
             a = Math.floor(Math.random() * 21);
             do {
                 b = Math.floor(Math.random() * 21);
-            } while (a / 3 === b / 3);
+            } while (inSameRange(a, b, 3));
             r = ffLetters[a];
             c = ffLetters[b];
             break;
@@ -149,7 +154,7 @@ function nextCode(hitFlag) {
             a = Math.floor(Math.random() * 21);
             do {
                 b = Math.floor(Math.random() * 21);
-            } while (a / 3 === b / 3);
+            } while (inSameRange(a, b, 3));
             r = chichuLettersCorner[a];
             c = chichuLettersCorner[b];
             break;
@@ -157,7 +162,7 @@ function nextCode(hitFlag) {
             a = Math.floor(Math.random() * 22);
             do {
                 b = Math.floor(Math.random() * 22);
-            } while (a / 2 === b / 2);
+            } while (inSameRange(a, b, 2));
             r = chichuLettersEdge[a];
             c = chichuLettersEdge[b];
             break;
@@ -199,13 +204,24 @@ function nextCode(hitFlag) {
         case 3:
             ansStatus = `<b style="color: #2b2b2b">skip</b>`;
             break;
+        case 4:
+            ansStatus = `<b style="color: #2b2b2b">swith mode</b>`;
+            break;
         default:
             ansStatus = `<b>error</b>`;
             break;
     }
 
-    document.getElementById("lastCode").innerHTML =
-        lastCode ? `上一个: <b>${lastCode}</b> (${displayList.join(", ")}) ${ansStatus}` : "";
+    if (lastCode && hitFlag != 4) {
+        document.getElementById("lastCode").innerHTML =
+            `上一个: <b>${lastCode}</b> (${displayList.join(", ")}) ${ansStatus}`;
+    } else if (hitFlag === 4) {
+        document.getElementById("lastCode").innerHTML =
+            `<b style="color: #2b2b2b">swith mode</b>`;
+    } else {
+        document.getElementById("lastCode").innerHTML = "";
+    }
+
 
     // 清空输入框
     document.getElementById("userInput").value = "";
@@ -266,6 +282,11 @@ function submitAnswer() {
     renderTable(data);
 
 }
+
+// 切换mode的时候自动下一题
+document.getElementById('modes').addEventListener('change', function (event) {
+    nextCode(4);
+});
 
 function checkEnter(event) {
     if (event.key === "Enter") {
