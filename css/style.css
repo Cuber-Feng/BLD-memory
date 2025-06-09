@@ -8,6 +8,10 @@ body {
     margin: 0;
 }
 
+body.dark {
+    background-color: #1E1E1E;
+    color: white;
+}
 
 .title {
     margin: 0 0 0 0;
@@ -15,11 +19,20 @@ body {
     color: #2b2b2b;
 }
 
+.dark .title{
+    color: white;
+}
+
 .blocks {
     padding: 1rem;
     background-color: #E5E1DA;
     margin: 0 auto 1rem auto;
     max-width: 300px;
+}
+
+.dark .blocks{
+    background-color: #2b2b2b;
+    color:#fff;
 }
 
 header {
@@ -30,6 +43,17 @@ header {
     margin: 0 auto;
     max-width: 20rem;
 }
+
+header {
+    display: flex;
+    justify-content: space-between; /* 左右分散对齐 */
+    align-items: center;            /* 垂直居中 */
+}
+
+.dark header {
+    color: white;
+}
+
 
 button {
     padding: 0.3rem;
@@ -43,18 +67,44 @@ button {
     font-size: 16px;
 }
 
+#light {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.1rem;
+    margin:0.3rem 0rem 0.3rem 0rem;
+    border-radius: 50%;
+    background-color: #c8d6db;
+    border: none;
+    color: #2b2b2b;
+    text-align: center;
+    display: inline-block;  
+    font-size: 20px;
+}
+
+.dark #light {
+    color: #E5E1DA;
+    background-color: #2b2b2b;
+}
+
+.dark button{
+    background-color: #728d96;
+}
+
 #modes {
     touch-action: manipulation;
     font-size: 16px;
     padding: 0.5rem 1rem;
     border: none;
     background-color: #e2b577;
-    color:white;
+    color: white;
     border-radius: 0;
-
 }
 
-option{
+.dark #modes{
+    background-color: #bc9764;
+}
+
+option {
     background-color: #F1F0E8;
     color: #2b2b2b;
 }
@@ -91,6 +141,10 @@ input {
     font-family: inherit;
 }
 
+.dark input{
+    color: #eeeeee;
+    background-color: #646464;
+}
 input:focus {
     border-color: #51829B;
     /* 蓝色高亮 */
@@ -129,6 +183,11 @@ input:focus {
     background-color: #F1F0E8;
 }
 
+.dark #letterTable th,
+.dark #letterTable td{
+    background-color: #2b2b2b;
+}
+
 /* 固定首行 */
 #letterTable thead th {
     position: sticky;
@@ -158,10 +217,10 @@ input:focus {
     color: #bbb;
 }
 
-
-footer table {
-    color: #2b2b2b;
+.dark #letterTable td.empty{
+    background-color: rgb(74, 74, 74);
 }
+
 
 footer table th {
     text-align: right;
@@ -171,4 +230,8 @@ footer table th {
 
 footer table td {
     padding: 0 0 0.4rem 1rem;
+}
+
+.dark a{
+    color: skyblue;
 }

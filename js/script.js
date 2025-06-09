@@ -212,7 +212,7 @@ function nextCode(hitFlag) {
     currentCode = r + c;
 
     // Testing
-    //currentCode = "AD";
+    // currentCode = "KW";
 
     // 显示当前 code
     document.getElementById("currentCode").innerHTML = `当前: <b>${currentCode}</b>`;
@@ -374,3 +374,18 @@ function importData(event) {
     // 重置文件输入，方便下次导入同一文件
     event.target.value = "";
 }
+
+// 切换昼夜模式
+function switchDayAndNight() {
+
+}
+
+
+// 初始化：从localStorage读取
+const savedMode = localStorage.getItem("theme");
+if (savedMode === "dark") {
+    document.body.classList.add("dark");
+} else if (savedMode === "light") {
+    document.body.classList.add("light");
+}
+
