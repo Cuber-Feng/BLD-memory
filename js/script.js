@@ -491,7 +491,7 @@ window.onload = () => {
 
     // check the device's mode
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (isDark) {
+    if (isDark && !document.body.classList.contains("dark")) {
         toggleMode();
     }
 }
