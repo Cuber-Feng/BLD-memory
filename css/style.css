@@ -56,6 +56,13 @@ header {
     color: white;
 }
 
+.blockHead {
+    display: flex;
+    justify-content: space-between;
+    /* 左右分散对齐 */
+    align-items: center;
+    /* 垂直居中 */
+}
 
 button {
     padding: 0.3rem;
@@ -158,6 +165,10 @@ input:focus {
     display: none;
 }
 
+#lettersContent {
+    display: none;
+}
+
 #tableContainer {
     width: 98vw;
     max-width: 98vw;
@@ -241,4 +252,37 @@ a {
 
 .dark a {
     color: skyblue;
+}
+
+.coordinate tr td {
+    min-width: 1.2rem;
+    min-height: 1.2rem;
+    text-align: center;
+    border: 1px solid gray;
+}
+
+.U {
+    background-color: yellow;
+}
+
+.L {
+    background-color: blue;
+    color: white;
+}
+
+.F {
+    background-color: red;
+    color: white;
+}
+
+.R {
+    background-color: lightgreen;
+}
+
+.B {
+    background-color: orange;
+}
+
+.D {
+    background-color: white;
 }

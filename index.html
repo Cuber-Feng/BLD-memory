@@ -13,7 +13,8 @@
 <body>
     <header>
         <h1>联想词记忆练习</h1>
-        <button class="toggle-button" onclick="toggleMode()" id="light"><img src="./icon/sun.png" style="width: 1.5rem; height: 1.5rem;"></button>
+        <button class="toggle-button" onclick="toggleMode()" id="light"><img src="./icon/sun.png"
+                style="width: 1.5rem; height: 1.5rem;"></button>
     </header>
     <main>
         <div id="operationBlock" class="blocks">
@@ -30,11 +31,20 @@
             <h2 class="title">训练</h2>
             <label for="modes">模式:</label>
             <select id="modes" name="modes">
-                <option value="general">全字母</option>
-                <option value="chichu">全彳亍</option>
-                <option value="corner-chichu">角块 (彳亍)</option>
-                <option value="edge-chichu">棱块 (彳亍)</option>
-                <option value="ff">角块 (枫)</option>
+                <optgroup label="通用">
+                    <option value="general">全字母</option>
+                    <option value="chichu">全彳亍</option>
+                    <!-- <option value="customGeneral">自定义</option> -->
+                </optgroup>
+                <optgroup label="角块">
+                    <option value="corner-chichu">彳亍</option>
+                    <option value="ff">枫</option>
+                    <option value="customCorner">自定义</option>
+                </optgroup>
+                <optgroup label="棱块">
+                    <option value="edge-chichu">彳亍</option>
+                    <option value="customEdge">自定义</option>
+                </optgroup>
             </select>
             <p id="lastCode">上一个: </p>
             <p id="currentCode">当前:--</p>
@@ -46,9 +56,10 @@
         </div>
 
         <div id="tableBlock" class="blocks">
-            <h2 class="title">联想词对应表</h2>
-
-            <button onclick="toggleTable()">显示/隐藏</button>
+            <div class="blockHead">
+                <h2 class="title">联想词对应表</h2>
+                <button onclick="toggleTable()">显示/隐藏</button>
+            </div>
             <button onclick="refreshTable()">刷新</button>
             <button onclick="clearAllData()" style="background-color: rgba(255, 0, 0, 0.605);">清空</button>
         </div>
@@ -56,6 +67,116 @@
 
     <div id="tableContainer">
         <table id="letterTable"></table>
+    </div>
+
+    <div id="letterSchema" class="blocks">
+        <div class="blockHead">
+            <h2 class="title">自定义编码</h2>
+            <button onclick="toggleLetters()">显示/隐藏</button>
+        </div>
+        <div id="lettersContent">
+            <table>
+                <tr>
+                    <td>角: </td>
+                    <td id="cDisplay">(暂无)</td>
+                </tr>
+                <tr>
+                    <td>棱: </td>
+                    <td id="eDisplay">(暂无)</td>
+                </tr>
+            </table>
+            <input type="text" id="customCorner" placeholder="自定义角块编码" onkeydown="checkEnter(event)"
+                autocomplete="off" />
+            <input type="text" id="customEdge" placeholder="自定义棱块编码" onkeydown="checkEnter(event)" autocomplete="off" />
+
+            <table class="coordinate">
+                <tr>
+                    <td colspan="3" rowspan="3" style="border: 0;"></td>
+                    <td class="U" id="C3">-</td>
+                    <td class="U" id="E4">-</td>
+                    <td class="U" id="C6">-</td>
+                </tr>
+                <tr>
+                    <td class="U" id="E2">-</td>
+                    <td class="U"><b>上</b></td>
+                    <td class="U" id="E6">-</td>
+                </tr>
+                <tr>
+                    <td class="U" id="C0">-</td>
+                    <td class="U" id="E0">-</td>
+                    <td class="U" id="C9">-</td>
+                </tr>
+
+                <tr>
+                    <td class="L" id="C4">-</td>
+                    <td class="L" id="E3">-</td>
+                    <td class="L" id="C2">-</td>
+
+                    <td class="F" id="C1">-</td>
+                    <td class="F" id="E1">-</td>
+                    <td class="F" id="C11">-</td>
+
+                    <td class="R" id="C10">-</td>
+                    <td class="R" id="E7">-</td>
+                    <td class="R" id="C8">-</td>
+
+                    <td class="B" id="C7">-</td>
+                    <td class="B" id="E5">-</td>
+                    <td class="B" id="C5">-</td>
+                </tr>
+                <tr>
+                    <td class="L" id="E21">-</td>
+                    <td class="L"><b>左</b></td>
+                    <td class="L" id="E19">-</td>
+
+                    <td class="F" id="E18">-</td>
+                    <td class="F"><b>前</b></td>
+                    <td class="F" id="E16">-</td>
+
+                    <td class="R" id="E17">-</td>
+                    <td class="R"><b>右</b></td>
+                    <td class="R" id="E23">-</td>
+
+                    <td class="B" id="E22">-</td>
+                    <td class="B"><b>后</b></td>
+                    <td class="B" id="E20">-</td>
+                </tr>
+                <tr>
+                    <td class="L" id="C17">-</td>
+                    <td class="L" id="E11">-</td>
+                    <td class="L" id="C13">-</td>
+
+                    <td class="F" id="C14">-</td>
+                    <td class="F" id="E9">-</td>
+                    <td class="F" id="C22">-</td>
+
+                    <td class="R" id="C23">-</td>
+                    <td class="R" id="E15">-</td>
+                    <td class="R" id="C19">-</td>
+
+                    <td class="B" id="C20">-</td>
+                    <td class="B" id="E13">-</td>
+                    <td class="B" id="C16">-</td>
+                </tr>
+                <tr>
+                    <td colspan="3" rowspan="3" style="border: 0;"></td>
+                    <td class="D" id="C12">-</td>
+                    <td class="D" id="E8">-</td>
+                    <td class="D" id="C21">-</td>
+                </tr>
+                <tr>
+                    <td class="D" id="E10">-</td>
+                    <td class="D"><b>下</b></td>
+                    <td class="D" id="E14">-</td>
+                </tr>
+                <tr>
+                    <td class="D" id="C15">-</td>
+                    <td class="D" id="E12">-</td>
+                    <td class="D" id="C18">-</td>
+                </tr>
+            </table>
+        </div>
+
     </div>
 
     <footer>

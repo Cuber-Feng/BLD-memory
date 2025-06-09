@@ -24,6 +24,42 @@ const chichuLettersEdge = [
 const chichuLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
     'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
 
+let customEdgeLetters = [];
+let customCornerLetters = [];
+
+function renderCustomLetters() {
+    let customLetters = loadCustomLetter();
+    customCornerLetters = customLetters["customCornerLetters"];
+    customEdgeLetters = customLetters["customEdgeLetters"];
+    for (let i = 0; i < customCornerLetters.length; i++) {
+        document.getElementById("C" + i).textContent = customCornerLetters[i];
+    }
+    for (let i = 0; i < customEdgeLetters.length; i++) {
+        document.getElementById("E" + i).textContent = customEdgeLetters[i];
+    }
+    document.getElementById("cDisplay").textContent = customCornerLetters.join(" ");
+    document.getElementById("eDisplay").textContent = customEdgeLetters.join(" ");
+}
+
+document.getElementById("customCorner").addEventListener("input", (e) => {
+    customCornerLetters = e.target.value.split(" ");
+    console.log(customCornerLetters);
+    for (let i = 0; i < customCornerLetters.length; i++) {
+        document.getElementById("C" + i).textContent = customCornerLetters[i];
+    }
+    saveCustomLetters();
+});
+
+document.getElementById("customEdge").addEventListener("input", (e) => {
+    customEdgeLetters = e.target.value.split(" ");
+    console.log(customEdgeLetters);
+    for (let i = 0; i < customEdgeLetters.length; i++) {
+        document.getElementById("E" + i).textContent = customEdgeLetters[i];
+    }
+    saveCustomLetters();
+});
+
+
 // 数据结构：key = 两个字母，如 "AB"，value 可以是字符串或数组
 // 使用 localStorage 来存储数据，key: "letterTableData"
 
@@ -36,9 +72,30 @@ function loadData() {
             return {};
         }
     }
+
     return {};
 }
 
+function loadCustomLetter() {
+    let customLetters = localStorage.getItem("customLetters");
+    //console.log(customLetters);
+    if (customLetters) {
+        try {
+            return JSON.parse(customLetters);
+        } catch {
+            return {};
+        }
+    }
+
+    return {};
+}
+
+function saveCustomLetters() {
+    let temp = { customCornerLetters, customEdgeLetters };
+    localStorage.setItem("customLetters", JSON.stringify(temp));
+    console.log(`save`);
+    console.log(temp);
+}
 
 function saveData(data) {
     localStorage.setItem("letterTableData", JSON.stringify(data));
@@ -139,6 +196,19 @@ function toggleTable() {
     refreshTable();
 }
 
+function toggleLetters() {
+    const letters = document.getElementById("lettersContent");
+    if (letters.innerHTML.trim() === "") {
+        renderCustomLetters();
+    }
+    if (letters.style.display === "none") {
+        letters.style.display = "table";
+    } else {
+        letters.style.display = "none";
+    }
+    renderCustomLetters();
+}
+
 let currentCode = null;
 let lastCode = null;
 let hitFlag = 0; // 标记这道题的回答情况(0: create, 1: hit, 2: add, 3: skip)
@@ -193,6 +263,22 @@ function nextCode(hitFlag) {
             } while (inSameRange(a, b, 2));
             r = chichuLettersEdge[a];
             c = chichuLettersEdge[b];
+            break;
+        case 'customCorner':
+            a = Math.floor(Math.random() * 21);
+            do {
+                b = Math.floor(Math.random() * 21);
+            } while (inSameRange(a, b, 3));
+            r = customCornerLetters[a];
+            c = customCornerLetters[b];
+            break;
+        case 'customEdge':
+            a = Math.floor(Math.random() * 22);
+            do {
+                b = Math.floor(Math.random() * 22);
+            } while (inSameRange(a, b, 2));
+            r = customEdgeLetters[a];
+            c = customEdgeLetters[b];
             break;
         default:
             a = Math.floor(Math.random() * 26);
@@ -396,7 +482,10 @@ function toggleMode() {
 window.onload = () => {
     //自动加载表格
     const data = loadData();
+    //load the customLetters in the localstorage
+    renderCustomLetters();
     renderTable(data);  // 构建好内容
+
     document.getElementById("letterTable").style.display = "none";  // 隐藏
     nextCode();
 
