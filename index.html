@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 响应式核心 -->
     <title>盲拧很简单</title>
-    <link rel="stylesheet" href="./css/style.css?20250609">
+    <link rel="stylesheet" href="./css/style.css?202506092234">
     <link rel="icon" type="image/x-icon" href="./icon/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/icon/icon.png">
 </head>
@@ -18,34 +18,39 @@
     </header>
     <main>
         <div id="operationBlock" class="blocks">
-            <h2 class="title">联想词文件</h2>
-
-            <div class="button-group">
-                <button onclick="downloadData()">导出</button>
-                <button onclick="document.getElementById('fileInput').click()">导入</button>
+            <div class="blockHead">
+                <h2 class="title">联想词文件</h2>
+                <div class="button-group">
+                    <button onclick="downloadData()">导出</button>
+                    <button onclick="document.getElementById('fileInput').click()">导入</button>
+                </div>
             </div>
+
             <input type="file" id="fileInput" style="display:none" accept=".json" onchange="importData(event)" />
         </div>
 
         <div id="trainingBlock" class="blocks">
-            <h2 class="title">训练</h2>
-            <label for="modes">模式:</label>
-            <select id="modes" name="modes">
-                <optgroup label="通用">
-                    <option value="general">全字母</option>
-                    <option value="chichu">全彳亍</option>
-                    <!-- <option value="customGeneral">自定义</option> -->
-                </optgroup>
-                <optgroup label="角块">
-                    <option value="corner-chichu">彳亍</option>
-                    <option value="ff">枫</option>
-                    <option value="customCorner">自定义</option>
-                </optgroup>
-                <optgroup label="棱块">
-                    <option value="edge-chichu">彳亍</option>
-                    <option value="customEdge">自定义</option>
-                </optgroup>
-            </select>
+            <div class="blockHead">
+                <h2 class="title">训练</h2>
+                <label for="modes"></label>
+                <select id="modes" name="modes">
+                    <optgroup label="通用">
+                        <option value="general">全字母</option>
+                        <option value="chichu">全彳亍</option>
+                        <!-- <option value="customGeneral">自定义</option> -->
+                    </optgroup>
+                    <optgroup label="角块">
+                        <option value="corner-chichu">彳亍</option>
+                        <option value="ff">枫</option>
+                        <option value="customCorner">自定义</option>
+                    </optgroup>
+                    <optgroup label="棱块">
+                        <option value="edge-chichu">彳亍</option>
+                        <option value="customEdge">自定义</option>
+                    </optgroup>
+                </select>
+            </div>
+
             <p id="lastCode">上一个: </p>
             <p id="currentCode">当前:--</p>
             <input type="text" id="userInput" placeholder="请输入对应联想词" onkeydown="checkEnter(event)" autocomplete="off" />
@@ -75,13 +80,14 @@
             <button onclick="toggleLetters()">显示/隐藏</button>
         </div>
         <div id="lettersContent">
+            <p>PS: 请用彳亍编码的顺序输入自定义编码, 自定义编码会实时储存</p>
             <table>
                 <tr>
-                    <td>角: </td>
+                    <td style="vertical-align: top;">角: </td>
                     <td id="cDisplay">(暂无)</td>
                 </tr>
                 <tr>
-                    <td>棱: </td>
+                    <td style="vertical-align: top;">棱: </td>
                     <td id="eDisplay">(暂无)</td>
                 </tr>
             </table>
@@ -208,7 +214,7 @@
         <p style="text-align: center;">© 2025 Maple Feng. All rights reserved.</p>
     </footer>
 
-    <script src="js/script.js?202506092209"></script>
+    <script src="js/script.js?202506092234"></script>
 
 </body>
 

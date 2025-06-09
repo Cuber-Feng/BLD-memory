@@ -263,6 +263,7 @@ a {
 
 .U {
     background-color: yellow;
+    color: #2b2b2b;
 }
 
 .L {
@@ -277,12 +278,16 @@ a {
 
 .R {
     background-color: lightgreen;
+    color: #2b2b2b;
+
 }
 
 .B {
+    color: #2b2b2b;
     background-color: orange;
 }
 
 .D {
+    color: #2b2b2b;
     background-color: white;
 }

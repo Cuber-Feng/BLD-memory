@@ -47,6 +47,8 @@ document.getElementById("customCorner").addEventListener("input", (e) => {
     for (let i = 0; i < customCornerLetters.length; i++) {
         document.getElementById("C" + i).textContent = customCornerLetters[i];
     }
+    document.getElementById("cDisplay").textContent = customCornerLetters.join(" ");
+
     saveCustomLetters();
 });
 
@@ -56,6 +58,7 @@ document.getElementById("customEdge").addEventListener("input", (e) => {
     for (let i = 0; i < customEdgeLetters.length; i++) {
         document.getElementById("E" + i).textContent = customEdgeLetters[i];
     }
+    document.getElementById("eDisplay").textContent = customEdgeLetters.join(" ");
     saveCustomLetters();
 });
 
@@ -316,10 +319,10 @@ function nextCode(hitFlag) {
             ansStatus = `<b style="color: #ECB159">add</b>`;
             break;
         case 3:
-            ansStatus = `<b style="color: #2b2b2b">skip</b>`;
+            ansStatus = `<b style="color:rgb(100, 100, 100)">skip</b>`;
             break;
         case 4:
-            ansStatus = `<b style="color: #2b2b2b">swith mode</b>`;
+            ansStatus = `<b style="color:rgb(100, 100, 100)">swith mode</b>`;
             break;
         default:
             ansStatus = `<b>error</b>`;
@@ -331,7 +334,7 @@ function nextCode(hitFlag) {
             `上一个: <b>${lastCode}</b> (${displayList.join(", ")}) ${ansStatus}`;
     } else if (hitFlag === 4) {
         document.getElementById("lastCode").innerHTML =
-            `<b style="color: #2b2b2b">swith mode</b>`;
+            `<b style="color: rgb(100, 100, 100)">swith mode</b>`;
     } else {
         document.getElementById("lastCode").innerHTML = "";
     }
@@ -511,10 +514,14 @@ window.onload = () => {
     renderTable(data);  // 构建好内容
 
     document.getElementById("letterTable").style.display = "none";  // 隐藏
+    document.getElementById("lettersContent").style.display = "none";  // 隐藏
+
     nextCode();
 
     // check the device's mode
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    console.log(isDark);
+
     if (isDark) {
         goDark();
     }
@@ -525,9 +532,9 @@ const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 mediaQuery.addEventListener('change', (e) => {
     const isDark = e.matches;
     // 你可以在这里切换页面主题
-    if(isDark){
+    if (isDark) {
         goDark();
-    }else{
+    } else {
         goLight();
     }
 });
