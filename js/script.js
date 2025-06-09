@@ -124,13 +124,6 @@ function refreshTable() {
     renderTable(data);
 }
 
-// 页面加载时自动加载表格
-window.onload = () => {
-    const data = loadData();
-    renderTable(data);  // 构建好内容
-    document.getElementById("letterTable").style.display = "none";  // 隐藏
-    nextCode();
-}
 
 // 显示/隐藏表格
 function toggleTable() {
@@ -375,17 +368,49 @@ function importData(event) {
     event.target.value = "";
 }
 
-// 切换昼夜模式
-function switchDayAndNight() {
+function toggleMode() {
+    if (document.body.classList.contains("dark")) {
 
+        document.body.classList.remove("dark");
+        document.body.classList.add("light");
+
+        document.querySelectorAll("body *").forEach(el => {
+            el.classList.remove("dark");
+            el.classList.add("light");
+        });
+
+        localStorage.setItem("theme", "light");
+    } else {
+        document.body.classList.remove("light");
+        document.body.classList.add("dark");
+
+        document.querySelectorAll("body *").forEach(el => {
+            el.classList.remove("light");
+            el.classList.add("dark");
+        });
+        localStorage.setItem("theme", "dark");
+    }
 }
 
+// 页面加载时
+window.onload = () => {
+    //自动加载表格
+    const data = loadData();
+    renderTable(data);  // 构建好内容
+    document.getElementById("letterTable").style.display = "none";  // 隐藏
+    nextCode();
 
-// 初始化：从localStorage读取
-const savedMode = localStorage.getItem("theme");
-if (savedMode === "dark") {
-    document.body.classList.add("dark");
-} else if (savedMode === "light") {
-    document.body.classList.add("light");
+    // check the device's mode
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (isDark) {
+        toggleMode();
+    }
 }
 
+const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+mediaQuery.addEventListener('change', (e) => {
+    const isDark = e.matches;
+    // 你可以在这里切换页面主题
+    toggleMode();
+});

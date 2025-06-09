@@ -19,7 +19,7 @@ body.dark {
     color: #2b2b2b;
 }
 
-.dark .title{
+.dark .title {
     color: white;
 }
 
@@ -30,9 +30,9 @@ body.dark {
     max-width: 300px;
 }
 
-.dark .blocks{
+.dark .blocks {
     background-color: #2b2b2b;
-    color:#fff;
+    color: #fff;
 }
 
 header {
@@ -46,8 +46,10 @@ header {
 
 header {
     display: flex;
-    justify-content: space-between; /* 左右分散对齐 */
-    align-items: center;            /* 垂直居中 */
+    justify-content: space-between;
+    /* 左右分散对齐 */
+    align-items: center;
+    /* 垂直居中 */
 }
 
 .dark header {
@@ -71,13 +73,13 @@ button {
     width: 2.5rem;
     height: 2.5rem;
     padding: 0.5rem;
-    margin:0.3rem 0rem 0.3rem 0rem;
+    margin: 0.3rem 0rem 0.3rem 0rem;
     border-radius: 50%;
     background-color: #E5E1DA;
     border: none;
     color: #2b2b2b;
     text-align: center;
-    display: inline-block;  
+    display: inline-block;
     font-size: 20px;
 }
 
@@ -86,7 +88,7 @@ button {
     background-color: #2b2b2b;
 }
 
-.dark button{
+.dark button {
     background-color: #728d96;
 }
 
@@ -100,7 +102,7 @@ button {
     border-radius: 0;
 }
 
-.dark #modes{
+.dark #modes {
     background-color: #bc9764;
 }
 
@@ -141,10 +143,11 @@ input {
     font-family: inherit;
 }
 
-.dark input{
+.dark input {
     color: #eeeeee;
     background-color: #646464;
 }
+
 input:focus {
     border-color: #51829B;
     /* 蓝色高亮 */
@@ -184,7 +187,7 @@ input:focus {
 }
 
 .dark #letterTable th,
-.dark #letterTable td{
+.dark #letterTable td {
     background-color: #2b2b2b;
 }
 
@@ -217,7 +220,7 @@ input:focus {
     color: #bbb;
 }
 
-.dark #letterTable td.empty{
+.dark #letterTable td.empty {
     background-color: rgb(74, 74, 74);
 }
 
@@ -232,6 +235,10 @@ footer table td {
     padding: 0 0 0.4rem 1rem;
 }
 
-.dark a{
+a {
+    color: darkblue;
+}
+
+.dark a {
     color: skyblue;
 }
