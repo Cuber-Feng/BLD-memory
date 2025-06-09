@@ -136,6 +136,12 @@ function renderTable(data) {
         case 'edge-chichu':
             l = chichuLettersEdge;
             break;
+        case 'customCorner':
+            l = customCornerLetters;
+            break;
+        case 'customEdge':
+            l = customEdgeLetters;
+            break;
         default:
             break;
     }
@@ -268,17 +274,17 @@ function nextCode(hitFlag) {
             c = chichuLettersEdge[b];
             break;
         case 'customCorner':
-            a = Math.floor(Math.random() * 21);
+            a = Math.floor(Math.random() * 24);
             do {
-                b = Math.floor(Math.random() * 21);
+                b = Math.floor(Math.random() * 24);
             } while (inSameRange(a, b, 3));
             r = customCornerLetters[a];
             c = customCornerLetters[b];
             break;
         case 'customEdge':
-            a = Math.floor(Math.random() * 22);
+            a = Math.floor(Math.random() * 24);
             do {
-                b = Math.floor(Math.random() * 22);
+                b = Math.floor(Math.random() * 24);
             } while (inSameRange(a, b, 2));
             r = customEdgeLetters[a];
             c = customEdgeLetters[b];
@@ -513,9 +519,6 @@ window.onload = () => {
     renderCustomLetters();
     renderTable(data);  // 构建好内容
 
-    document.getElementById("letterTable").style.display = "none";  // 隐藏
-    document.getElementById("lettersContent").style.display = "none";  // 隐藏
-
     nextCode();
 
     // check the device's mode
@@ -525,6 +528,9 @@ window.onload = () => {
     if (isDark) {
         goDark();
     }
+
+    document.getElementById("letterTable").style.display = "none";  // 隐藏
+    document.getElementById("lettersContent").style.display = "none";  // 隐藏
 }
 
 const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
