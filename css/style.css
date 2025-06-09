@@ -165,6 +165,10 @@ input:focus {
     display: none;
 }
 
+#lettersContent {
+    display: none;
+}
+
 #tableContainer {
     width: 98vw;
     max-width: 98vw;

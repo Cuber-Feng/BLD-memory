@@ -27,8 +27,7 @@ const chichuLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L
 let customEdgeLetters = [];
 let customCornerLetters = [];
 
-function renderCustomLetters() {
-    let customLetters = loadCustomLetter();
+function renderCustomLetters(customLetters) {
     customCornerLetters = customLetters["customCornerLetters"];
     customEdgeLetters = customLetters["customEdgeLetters"];
     for (let i = 0; i < customCornerLetters.length; i++) {
@@ -515,8 +514,9 @@ function goLight() {
 window.onload = () => {
     //自动加载表格
     const data = loadData();
+    const l = loadCustomLetter();
     //load the customLetters in the localstorage
-    renderCustomLetters();
+    renderCustomLetters(l);
     renderTable(data);  // 构建好内容
 
     nextCode();
