@@ -456,7 +456,6 @@ function importData(event) {
 
 function toggleMode() {
     if (document.body.classList.contains("dark")) {
-
         document.body.classList.remove("dark");
         document.body.classList.add("light");
 
@@ -464,8 +463,6 @@ function toggleMode() {
             el.classList.remove("dark");
             el.classList.add("light");
         });
-
-        localStorage.setItem("theme", "light");
     } else {
         document.body.classList.remove("light");
         document.body.classList.add("dark");
@@ -474,7 +471,34 @@ function toggleMode() {
             el.classList.remove("light");
             el.classList.add("dark");
         });
-        localStorage.setItem("theme", "dark");
+    }
+}
+
+function goDark() {
+    if (document.body.classList.contains("dark")) {
+        return;
+    } else {
+        document.body.classList.remove("light");
+        document.body.classList.add("dark");
+
+        document.querySelectorAll("body *").forEach(el => {
+            el.classList.remove("light");
+            el.classList.add("dark");
+        });
+    }
+}
+
+function goLight() {
+    if (document.body.classList.contains("dark")) {
+        document.body.classList.remove("dark");
+        document.body.classList.add("light");
+
+        document.querySelectorAll("body *").forEach(el => {
+            el.classList.remove("dark");
+            el.classList.add("light");
+        });
+    } else {
+        return;
     }
 }
 
@@ -491,8 +515,8 @@ window.onload = () => {
 
     // check the device's mode
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (isDark && !document.body.classList.contains("dark")) {
-        toggleMode();
+    if (isDark) {
+        goDark();
     }
 }
 
@@ -501,5 +525,9 @@ const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 mediaQuery.addEventListener('change', (e) => {
     const isDark = e.matches;
     // 你可以在这里切换页面主题
-    toggleMode();
+    if(isDark){
+        goDark();
+    }else{
+        goLight();
+    }
 });
