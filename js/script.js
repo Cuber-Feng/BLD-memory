@@ -28,16 +28,26 @@ let customEdgeLetters = [];
 let customCornerLetters = [];
 
 function renderCustomLetters(customLetters) {
-    customCornerLetters = customLetters["customCornerLetters"];
-    customEdgeLetters = customLetters["customEdgeLetters"];
-    for (let i = 0; i < customCornerLetters.length; i++) {
-        document.getElementById("C" + i).textContent = customCornerLetters[i];
+    if (customLetters) {
+        customCornerLetters = customLetters["customCornerLetters"];
+        customEdgeLetters = customLetters["customEdgeLetters"];
     }
-    for (let i = 0; i < customEdgeLetters.length; i++) {
-        document.getElementById("E" + i).textContent = customEdgeLetters[i];
+
+    if (customCornerLetters) {
+        for (let i = 0; i < customCornerLetters.length; i++) {
+            document.getElementById("C" + i).textContent = customCornerLetters[i];
+        }
+        document.getElementById("cDisplay").textContent = customCornerLetters.join(" ");
+
     }
-    document.getElementById("cDisplay").textContent = customCornerLetters.join(" ");
-    document.getElementById("eDisplay").textContent = customEdgeLetters.join(" ");
+    if (customEdgeLetters) {
+        for (let i = 0; i < customEdgeLetters.length; i++) {
+            document.getElementById("E" + i).textContent = customEdgeLetters[i];
+        }
+        document.getElementById("eDisplay").textContent = customEdgeLetters.join(" ");
+
+    }
+
 }
 
 document.getElementById("customCorner").addEventListener("input", (e) => {
@@ -105,6 +115,8 @@ function saveData(data) {
 
 // 渲染表格
 function renderTable(data) {
+    //console.log("renderTable");
+
     const table = document.getElementById("letterTable");
     table.innerHTML = "";
 
@@ -185,6 +197,7 @@ function renderTable(data) {
 
 // 刷新表格显示
 function refreshTable() {
+    //console.log("refreshTable");
     const data = loadData();
     renderTable(data);
 }
@@ -192,14 +205,28 @@ function refreshTable() {
 
 // 显示/隐藏表格
 function toggleTable() {
+    //console.log("toggleTable");
+
+    let buttons = document.getElementsByClassName("tableButton");
+
+
     const table = document.getElementById("letterTable");
     if (table.innerHTML.trim() === "") {
         renderTable(loadData());
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.display = "inline-block";
+        }
     }
     if (table.style.display === "none") {
         table.style.display = "table";
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.display = "inline-block";
+        }
     } else {
         table.style.display = "none";
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].style.display = "none";
+        }
     }
     refreshTable();
 }
@@ -518,19 +545,23 @@ window.onload = () => {
     //load the customLetters in the localstorage
     renderCustomLetters(l);
     renderTable(data);  // 构建好内容
-
+    refreshTable();
     nextCode();
 
     // check the device's mode
     const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    console.log(isDark);
+    //console.log(isDark);
 
     if (isDark) {
         goDark();
     }
-
     document.getElementById("letterTable").style.display = "none";  // 隐藏
     document.getElementById("lettersContent").style.display = "none";  // 隐藏
+    let buttons = document.getElementsByClassName("tableButton");
+    for (let i = 0; i < buttons.length; i++) {
+        buttons[i].style.display = "none";
+    }
+
 }
 
 const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');

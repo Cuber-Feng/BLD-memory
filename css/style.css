@@ -161,7 +161,7 @@ input:focus {
     box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
 }
 
-#letterTable {
+#letterTable, {
     display: none;
 }
 
