@@ -64,6 +64,59 @@ header {
     /* 垂直居中 */
 }
 
+input {
+    font-size: 16px;
+    /* 至少16px，防止iOS自动缩放 */
+    padding: 12px;
+    margin: 0;
+    width: 75%;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    background-color: #fff;
+    font-family: inherit;
+    display: inline-block;
+    vertical-align: middle;
+    height: 45px;
+}
+
+.dark input {
+    color: #eeeeee;
+    background-color: #646464;
+}
+
+input:focus {
+    border-color: #51829B;
+    /* 蓝色高亮 */
+    box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
+}
+
+#inputAndSubmit {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+#submit {
+    padding: 0;
+    margin: 0;
+    height: 45px;
+    width: 45px;
+    border-radius: 30%;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #5A827E;
+}
+
+#submit img {
+    padding: 0;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+}
+
 button {
     padding: 0.3rem;
     margin: 0rem 0.3rem 0.3rem 0rem;
@@ -135,33 +188,9 @@ main {
 
 /* 简单响应式样式 */
 
-input {
-    font-size: 16px;
-    /* 至少16px，防止iOS自动缩放 */
-    padding: 12px;
-    margin: 0 0 1rem 0;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-    background-color: #fff;
-    font-family: inherit;
-}
 
-.dark input {
-    color: #eeeeee;
-    background-color: #646464;
-}
 
-input:focus {
-    border-color: #51829B;
-    /* 蓝色高亮 */
-    box-shadow: 0 0 5px rgba(0, 122, 255, 0.5);
-}
-
-#letterTable, {
+#letterTable {
     display: none;
 }
 
@@ -252,6 +281,10 @@ a {
 
 .dark a {
     color: skyblue;
+}
+
+.coordinate {
+    margin-top: 1rem;
 }
 
 .coordinate tr td {

@@ -53,11 +53,14 @@
 
             <p id="lastCode">上一个: </p>
             <p id="currentCode">当前:--</p>
-            <input type="text" id="userInput" placeholder="请输入对应联想词" onkeydown="checkEnter(event)" autocomplete="off" />
-            <div class="button-group">
-                <button onclick="submitAnswer()">提交</button>
-                <button onclick="nextCode(3)">跳过</button>
+            <div id="inputAndSubmit">
+                <input type="text" id="userInput" placeholder="请输入对应联想词" onkeydown="checkEnter(event)"
+                    autocomplete="off" />
+                <button onclick="submitAnswer()" id="submit"><img src="./icon/rightArr.png" ></button>
             </div>
+            <!-- <div class="button-group"> -->
+            <!-- <button onclick="nextCode(3)">跳过</button> -->
+            <!-- </div> -->
         </div>
 
         <div id="tableBlock" class="blocks">
@@ -66,7 +69,8 @@
                 <button onclick="toggleTable()">显示/隐藏</button>
             </div>
             <button onclick="refreshTable()" class="tableButton">刷新</button>
-            <button onclick="clearAllData()" class="tableButton" style="background-color: rgba(255, 0, 0, 0.605);">清空</button>
+            <button onclick="clearAllData()" class="tableButton"
+                style="background-color: rgba(255, 0, 0, 0.605);">清空</button>
         </div>
     </main>
 
@@ -80,7 +84,7 @@
             <button onclick="toggleLetters()">显示/隐藏</button>
         </div>
         <div id="lettersContent">
-            <p>PS: 请用彳亍编码的顺序输入自定义编码, 自定义编码会实时储存</p>
+            <p>PS: 请用彳亍编码的顺序输入自定义编码, 用空格隔开(自定义编码会实时储存)</p>
             <table>
                 <tr>
                     <td style="vertical-align: top;">角: </td>
