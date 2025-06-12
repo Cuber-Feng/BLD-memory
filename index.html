@@ -34,28 +34,28 @@
                 <h2 class="title" data-i18n="practice">训练</h2>
                 <label for="modes"></label>
                 <select id="modes" name="modes">
-                    <optgroup label="通用">
-                        <option value="general">「通用」全字母</option>
-                        <option value="chichu">「通用」全彳亍</option>
+                    <optgroup label="通用" data-i18n="general">
+                        <option value="general" data-i18n="general-full">「通用」全字母</option>
+                        <option value="chichu" data-i18n="general-chichu">「通用」全彳亍</option>
                         <!-- <option value="customGeneral">自定义</option> -->
                     </optgroup>
-                    <optgroup label="角块">
-                        <option value="corner-chichu">「角块」彳亍</option>
-                        <option value="ff">「角块」枫</option>
-                        <option value="customCorner">「角块」自定义</option>
+                    <optgroup label="角块" data-i18n="corner">
+                        <option value="corner-chichu" data-i18n="c-chichu">「角块」彳亍</option>
+                        <option value="ff" data-i18n="c-maple">「角块」枫</option>
+                        <option value="customCorner" data-i18n="c-custom">「角块」自定义</option>
                     </optgroup>
-                    <optgroup label="棱块">
-                        <option value="edge-chichu">「棱块」彳亍</option>
-                        <option value="customEdge">「棱块」自定义</option>
+                    <optgroup label="棱块" data-i18n="edge">
+                        <option value="edge-chichu" data-i18n="e-chichu">「棱块」彳亍</option>
+                        <option value="customEdge" data-i18n="e-custom">「棱块」自定义</option>
                     </optgroup>
                 </select>
             </div>
 
             <p id="lastCode" data-i18n="last">上一个: </p>
-            <p id="currentCode" data-i18n="current">当前:--</p>
+            <p id="currentCode" data-i18n="current">Current:--</p>
             <div id="inputAndSubmit">
                 <input type="text" id="userInput" placeholder="请输入对应联想词" onkeydown="checkEnter(event)"
-                    autocomplete="off" />
+                    autocomplete="off" data-i18n="inputPlaceholder" />
                 <button onclick="submitAnswer()" id="submit"><img src="./icon/rightArr.png"></button>
             </div>
             <!-- <div class="button-group"> -->
@@ -68,9 +68,9 @@
                 <h2 class="title" data-i18n="wordTable">联想词对应表</h2>
                 <button onclick="toggleTable()" data-i18n="hideShow">显示/隐藏</button>
             </div>
-            <button onclick="refreshTable()" class="tableButton">刷新</button>
+            <button onclick="refreshTable()" class="tableButton" data-i18n="refresh">刷新</button>
             <button onclick="clearAllData()" class="tableButton"
-                style="background-color: rgba(255, 0, 0, 0.605);">清空</button>
+                style="background-color: rgba(255, 0, 0, 0.605);" data-i18n="clear">清空</button>
         </div>
     </main>
 
@@ -231,8 +231,8 @@
         <p style="text-align: center;">© 2025 Maple Feng. All rights reserved.</p>
     </footer>
 
-    <script src="js/script.js?20250610"></script>
-    <script src="js/languages.js"></script>
+    <script src="js/script.js?20250612"></script>
+    <script src="js/languages.js?20250612"></script>
 
 </body>
 

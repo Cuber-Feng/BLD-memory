@@ -13,5 +13,18 @@
     "myWCA": "My WCA Page",
     "bilibili": "My Bilibili",
     "bugReport": "Bug Report",
-    "language": "🌍️Language"
+    "language": "🌍️Language",
+    "refresh": "Refresh",
+    "clear": "Clear",
+    "general": "General",
+    "general-full": "G-All",
+    "general-chichu": "G-Chichu",
+    "c-chichu": "C-Chichu",
+    "e-chichu": "E-Chichu",
+    "c-maple": "C-Maple🍁️",
+    "c-custom": "C-Custom",
+    "e-custom": "E-Custom",
+    "corner": "Corner",
+    "edge": "Edge",
+    "inputPlaceholder":"The Mnemonic Word"
 }

@@ -329,7 +329,7 @@ function nextCode(hitFlag) {
     // currentCode = "KW";
 
     // 显示当前 code
-    document.getElementById("currentCode").innerHTML = `当前: <b>${currentCode}</b>`;
+    document.getElementById("currentCode").innerHTML = `Current: <b>${currentCode}</b>`;
 
     // 获取 lastCode 的联想词
     const data = loadData();
@@ -363,7 +363,7 @@ function nextCode(hitFlag) {
 
     if (lastCode && hitFlag != 4) {
         document.getElementById("lastCode").innerHTML =
-            `上一个: <b>${lastCode}</b> (${displayList.join(", ")}) ${ansStatus}`;
+            `Last: <b>${lastCode}</b> (${displayList.join(", ")}) ${ansStatus}`;
     } else if (hitFlag === 4) {
         document.getElementById("lastCode").innerHTML =
             `<b style="color: rgb(100, 100, 100)">swith mode</b>`;
