@@ -5,6 +5,7 @@ function detectLang() {
     if (lang.startsWith('zh-tw')) return 'zh-TW';
     if (lang.startsWith('zh-hk')) return 'zh-TW'; // 可自訂為 zh-HK
     if (lang.startsWith('zh')) return 'zh-TW';
+    if (lang.startsWith('ja')) return 'ja';
     return 'en';
 }
 
