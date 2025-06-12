@@ -166,6 +166,20 @@ button {
     background-color: #bc9764;
 }
 
+#langSwitcher {
+    touch-action: manipulation;
+    font-size: 16px;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #77b9e2;
+    color: white;
+    border-radius: 0;
+}
+
+.dark #langSwitcher {
+    background-color: #497089;
+}
+
 option {
     background-color: #F1F0E8;
     color: #2b2b2b;
