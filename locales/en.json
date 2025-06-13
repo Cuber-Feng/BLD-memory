@@ -13,7 +13,7 @@
     "myWCA": "My WCA Page",
     "bilibili": "My Bilibili",
     "bugReport": "Bug Report",
-    "language": "🌍️Language",
+    "language": "Language🌍️",
     "refresh": "Refresh",
     "clear": "Clear",
     "general": "General",
@@ -26,5 +26,7 @@
     "e-custom": "E-Custom",
     "corner": "Corner",
     "edge": "Edge",
-    "inputPlaceholder":"The Mnemonic Word"
+    "savedCode":"Saved Code (Copy & Share)",
+    "inputPlaceholder":"The Mnemonic Word",
+    "customPS":"PS: Enter letters (separated by spaces) in the input box, and the image will change at any time. You can try the following code to see the effect"
 }

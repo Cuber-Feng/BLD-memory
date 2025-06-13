@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    font-family: serif, Arial, Helvetica, sans-serif, sans-serif;
+    /* font-family: serif, Arial, Helvetica, sans-serif, sans-serif; */
     margin: 0;
 }
 
@@ -337,4 +337,20 @@ a {
 .D {
     color: #2b2b2b;
     background-color: white;
+}
+
+#currentCustomCode {
+    margin-top: 1rem;
+}
+
+#currentCustomCode td, caption {
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    background-color: rgba(18, 18, 18, 0.1);
+}
+
+#eg {
+    background-color: rgba(18, 18, 18, 0.1);
+    padding: 0.3rem;
+    border-radius: 0.5rem;
 }

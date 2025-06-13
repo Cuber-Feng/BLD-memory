@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -69,8 +69,8 @@
                 <button onclick="toggleTable()" data-i18n="hideShow">显示/隐藏</button>
             </div>
             <button onclick="refreshTable()" class="tableButton" data-i18n="refresh">刷新</button>
-            <button onclick="clearAllData()" class="tableButton"
-                style="background-color: rgba(255, 0, 0, 0.605);" data-i18n="clear">清空</button>
+            <button onclick="clearAllData()" class="tableButton" style="background-color: rgba(255, 0, 0, 0.605);"
+                data-i18n="clear">清空</button>
         </div>
     </main>
 
@@ -84,21 +84,9 @@
             <button onclick="toggleLetters()" data-i18n="hideShow">显示/隐藏</button>
         </div>
         <div id="lettersContent">
-            <p>PS: 请用彳亍编码的顺序输入自定义编码, 用空格隔开(自定义编码会实时储存)</p>
-            <table>
-                <tr>
-                    <td style="vertical-align: top;">角: </td>
-                    <td id="cDisplay">(暂无)</td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: top;">棱: </td>
-                    <td id="eDisplay">(暂无)</td>
-                </tr>
-            </table>
-            <input type="text" id="customCorner" placeholder="自定义角块编码" onkeydown="checkEnter(event)"
-                autocomplete="off" />
-            <input type="text" id="customEdge" placeholder="自定义棱块编码" onkeydown="checkEnter(event)" autocomplete="off" />
-
+            <p data-i18n="customPS">PS: 在輸入框里輸入字母(用空格隔開), 圖會隨時變化.
+                可試試下面的編碼看效果</p>
+            <p id="eg">1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24</p>
             <table class="coordinate">
                 <tr>
                     <td colspan="3" rowspan="3" style="border: 0;"></td>
@@ -185,6 +173,23 @@
                     <td class="D" id="C18">-</td>
                 </tr>
             </table>
+            <input type="text" id="customCorner" placeholder="自定义角块编码" onkeydown="checkEnter(event)"
+                autocomplete="off" data-i18n="corner"/>
+            <input type="text" id="customEdge" placeholder="自定义棱块编码" onkeydown="checkEnter(event)" autocomplete="off" data-i18n="edge"/>
+
+            <table id="currentCustomCode">
+                <caption style="font-weight: 600;" data-i18n="savedCode">Saved Code</caption>
+                <tr>
+                    <td data-i18n="corner">角: </td>
+                    <td id="cDisplay">-</td>
+                </tr>
+                <tr>
+                    <td data-i18n="edge">棱: </td>
+                    <td id="eDisplay">-</td>
+                </tr>
+            </table>
+
+            
         </div>
 
     </div>
@@ -199,8 +204,8 @@
                 <option value="ja">日本語</option>
             </select>
         </div>
-        <p>Multilingual features are still under development
-            <br>多語言功能仍在開發中<br>多语言功能仍在开发中<br>多言語機能はまだ開発中です</p>
+        <!-- <p>Multilingual features are still under development
+            <br>多語言功能仍在開發中<br>多语言功能仍在开发中<br>多言語機能はまだ開発中です</p> -->
 
     </div>
 

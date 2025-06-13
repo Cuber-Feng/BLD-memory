@@ -13,7 +13,7 @@
     "myWCA": "私のWCAページ",
     "bilibili": "私のBilibili",
     "bugReport": "バグレポート",
-    "language": "🌍️言語",
+    "language": "言語🌍️",
     "refresh": "更新",
     "clear": "クリア",
     "general": "一般",
@@ -26,5 +26,7 @@
     "e-custom": "E-Custom",
     "corner": "コーナー",
     "edge": "エッジ",
-    "inputPlaceholder": "記憶術語"
+    "savedCode":"保存されたコード（コピーして共有できます）",
+    "inputPlaceholder": "記憶術語",
+    "customPS": "PS: 入力ボックスに文字（スペース区切り）を入力すると、画像が随時切り替わります。効果を確認するには、以下のコードを試してください。"
 }
