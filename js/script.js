@@ -423,7 +423,7 @@ function goHead(arr, val) { // 把数组arr里的val提到最前面
 // 提交答案
 function submitAnswer() {
     if (!currentCode) {
-        alert("彩蛋");
+        alert("Unexcepted Error. You can report to me.");
         return;
     }
 
