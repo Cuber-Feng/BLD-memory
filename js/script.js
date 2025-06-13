@@ -34,6 +34,10 @@ const speffzCorner = [
     'W', 'O', 'T',
     'V', 'K', 'P'];
 
+const speffzEdge = [
+    'C', 'I', 'D', 'E', 'A', 'Q', 'B', 'M', 'U', 'K', 'X', 'G', 'W', 'S', 
+    'V','O', 'J', 'P', 'L', 'F', 'R', 'H', 'T', 'N'];
+
 let customEdgeLetters = [];
 let customCornerLetters = [];
 
@@ -279,6 +283,12 @@ function nextCode(hitFlag) {
             r = letters[a];
             c = letters[b];
             break;
+        case 'speffz':
+            a = Math.floor(Math.random() * 24);
+            b = Math.floor(Math.random() * 24);
+            r = speffzCorner[a];
+            c = speffzCorner[b];
+            break;
         case 'chichu':
             a = Math.floor(Math.random() * 24);
             b = Math.floor(Math.random() * 24);
@@ -333,6 +343,14 @@ function nextCode(hitFlag) {
             } while (inSameRange(a, b, 3));
             r = speffzCorner[a];
             c = speffzCorner[b];
+            break;
+        case 'speffzEdge':
+            a = Math.floor(Math.random() * 24);
+            do {
+                b = Math.floor(Math.random() * 24);
+            } while (inSameRange(a, b, 2));
+            r = speffzEdge[a];
+            c = speffzEdge[b];
             break;
         default:
             a = Math.floor(Math.random() * 26);
