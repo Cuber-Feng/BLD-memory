@@ -19,6 +19,10 @@ body.dark {
     color: #2b2b2b;
 }
 
+h2{
+    font-weight: 500;
+}
+
 .dark .title {
     color: white;
 }
