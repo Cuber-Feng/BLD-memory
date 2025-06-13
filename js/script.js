@@ -24,6 +24,16 @@ const chichuLettersEdge = [
 const chichuLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
     'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
 
+const speffzCorner = [
+    'D', 'I', 'F',
+    'A', 'E', 'R',
+    'B', 'Q', 'N',
+    'C', 'M', 'J',
+    'U', 'G', 'L',
+    'X', 'S', 'H',
+    'W', 'O', 'T',
+    'V', 'K', 'P'];
+
 let customEdgeLetters = [];
 let customCornerLetters = [];
 
@@ -314,6 +324,15 @@ function nextCode(hitFlag) {
             } while (inSameRange(a, b, 2));
             r = customEdgeLetters[a];
             c = customEdgeLetters[b];
+            break;
+
+        case 'speffzCorner':
+            a = Math.floor(Math.random() * 24);
+            do {
+                b = Math.floor(Math.random() * 24);
+            } while (inSameRange(a, b, 3));
+            r = speffzCorner[a];
+            c = speffzCorner[b];
             break;
         default:
             a = Math.floor(Math.random() * 26);
