@@ -1,4 +1,4 @@
-const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
+const letters = Array.from({length: 26}, (_, i) => String.fromCharCode(65 + i));
 const ffLetters = [
     'A', 'B', 'C',
     'D', 'K', 'F',
@@ -35,8 +35,8 @@ const speffzCorner = [
     'V', 'K', 'P'];
 
 const speffzEdge = [
-    'C', 'I', 'D', 'E', 'A', 'Q', 'B', 'M', 'U', 'K', 'X', 'G', 'W', 'S', 
-    'V','O', 'J', 'P', 'L', 'F', 'R', 'H', 'T', 'N'];
+    'C', 'I', 'D', 'E', 'A', 'Q', 'B', 'M', 'U', 'K', 'X', 'G', 'W', 'S',
+    'V', 'O', 'J', 'P', 'L', 'F', 'R', 'H', 'T', 'N'];
 
 let customEdgeLetters = [];
 let customCornerLetters = [];
@@ -117,7 +117,7 @@ function loadCustomLetter() {
 }
 
 function saveCustomLetters() {
-    let temp = { customCornerLetters, customEdgeLetters };
+    let temp = {customCornerLetters, customEdgeLetters};
     localStorage.setItem("customLetters", JSON.stringify(temp));
     console.log(`save`);
     console.log(temp);
@@ -260,7 +260,7 @@ function toggleLetters() {
 
 let currentCode = null;
 let lastCode = null;
-let hitFlag = 0; // 标记这道题的回答情况(0: create, 1: hit, 2: add, 3: skip)
+//let hitFlag = 0; 标记这道题的回答情况(0: create, 1: hit, 2: add, 3: skip)
 
 // 辅助函数, 判断两个数在整除一个数之后结果是否相等
 function inSameRange(a, b, range) {
@@ -376,7 +376,7 @@ function nextCode(hitFlag) {
         displayList = Array.isArray(entry) ? entry : [entry];
     }
 
-    let ansStatus = null;
+    let ansStatus;
     switch (hitFlag) {
         case 0:
             ansStatus = `<b style="color: #27548A">create</b>`;
@@ -391,7 +391,7 @@ function nextCode(hitFlag) {
             ansStatus = `<b style="color:rgb(100, 100, 100)">skip</b>`;
             break;
         case 4:
-            ansStatus = `<b style="color:rgb(100, 100, 100)">swith mode</b>`;
+            ansStatus = `<b style="color:rgb(100, 100, 100)">switch mode</b>`;
             break;
         default:
             ansStatus = `<b>error</b>`;
@@ -403,7 +403,7 @@ function nextCode(hitFlag) {
             `Last: <b>${lastCode}</b> (${displayList.join(", ")}) ${ansStatus}`;
     } else if (hitFlag === 4) {
         document.getElementById("lastCode").innerHTML =
-            `<b style="color: rgb(100, 100, 100)">swith mode</b>`;
+            `<b style="color: rgb(100, 100, 100)">switch mode</b>`;
     } else {
         document.getElementById("lastCode").innerHTML = "";
     }
@@ -480,6 +480,7 @@ function checkEnter(event) {
         submitAnswer();
     }
 }
+
 function clearAllData() {
     if (confirm("确定要清空所有数据吗？此操作不可恢复！")) {
         localStorage.removeItem("letterTableData"); // 删除数据
@@ -491,7 +492,7 @@ function clearAllData() {
 // 下载当前 localStorage 数据
 function downloadData() {
     const dataStr = localStorage.getItem("letterTableData") || "{}";
-    const blob = new Blob([dataStr], { type: "application/json" });
+    const blob = new Blob([dataStr], {type: "application/json"});
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement("a");
@@ -547,9 +548,7 @@ function toggleMode() {
 }
 
 function goDark() {
-    if (document.body.classList.contains("dark")) {
-        return;
-    } else {
+    if (!document.body.classList.contains("dark")) {
         document.body.classList.remove("light");
         document.body.classList.add("dark");
 
@@ -569,8 +568,6 @@ function goLight() {
             el.classList.remove("dark");
             el.classList.add("light");
         });
-    } else {
-        return;
     }
 }
 
