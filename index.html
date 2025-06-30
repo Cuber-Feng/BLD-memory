@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- 响应式核心 -->
     <title data-i18n="title">盲拧很简单</title>
-    <link rel="stylesheet" href="./css/style.css?20250629">
+    <link rel="stylesheet" href="./css/style.css?20250630">
     <link rel="icon" type="image/x-icon" href="./icon/rubik.png">
     <link rel="apple-touch-icon" href="icon/rubik.png?version1">
 </head>
@@ -17,232 +17,237 @@
         <button class="toggle-button" onclick="toggleMode()" id="light"><img src="./icon/sun.png"
                 style="width: 1.5rem; height: 1.5rem;" alt="light/dark"></button>
     </header>
-    <main>
-        <div id="operationBlock" class="blocks">
-            <div class="blockHead">
-                <h2 class="title" data-i18n="file">联想词文件</h2>
-                <div class="button-group">
-                    <button onclick="downloadData()" data-i18n="export">导出</button>
-                    <button onclick="document.getElementById('fileInput').click()" data-i18n="import">导入</button>
+
+    <div class="scrolling">
+        <main>
+            <div id="operationBlock" class="blocks">
+                <div class="blockHead">
+                    <h2 class="title" data-i18n="file">联想词文件</h2>
+                    <div class="button-group">
+                        <button onclick="downloadData()" data-i18n="export">导出</button>
+                        <button onclick="document.getElementById('fileInput').click()" data-i18n="import">导入</button>
+                    </div>
+                </div>
+
+                <input type="file" id="fileInput" style="display:none" accept=".json" onchange="importData(event)" />
+            </div>
+
+            <div id="trainingBlock" class="blocks">
+                <div class="blockHead">
+                    <h2 class="title" data-i18n="practice">训练</h2>
+                    <label for="modes"></label>
+                    <select id="modes" name="modes">
+                        <optgroup label="通用" data-i18n="general">
+                            <option value="general" data-i18n="general-full">「通用」全字母</option>
+                            <option value="speffz" data-i18n="general-speffz">「通用」Speffz</option>
+                            <option value="chichu" data-i18n="general-chichu">「通用」全彳亍</option>
+                            <!-- <option value="customGeneral">自定义</option> -->
+                        </optgroup>
+                        <optgroup label="角块" data-i18n="corner">
+                            <option value="speffzCorner" data-i18n="c-speffz">「角块」Speffz</option>
+                            <option value="corner-chichu" data-i18n="c-chichu">「角块」彳亍</option>
+                            <option value="ff" data-i18n="c-maple">「角块」枫</option>
+                            <option value="customCorner" data-i18n="c-custom">「角块」自定义</option>
+                        </optgroup>
+                        <optgroup label="棱块" data-i18n="edge">
+                            <option value="speffzEdge" data-i18n="e-speffz">「棱块」Speffz</option>
+                            <option value="edge-chichu" data-i18n="e-chichu">「棱块」彳亍</option>
+                            <option value="customEdge" data-i18n="e-custom">「棱块」自定义</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <p id="lastCode" data-i18n="last">上一个: </p>
+                <p id="currentCode" data-i18n="current">Current:--</p>
+                <div id="inputAndSubmit">
+                    <input type="text" id="userInput" placeholder="请输入对应联想词" onkeydown="checkEnter(event)"
+                        autocomplete="off" data-i18n="inputPlaceholder" />
+                    <button onclick="submitAnswer()" id="submit"><img src="./icon/rightArr.png" alt="submit"></button>
                 </div>
             </div>
 
-            <input type="file" id="fileInput" style="display:none" accept=".json" onchange="importData(event)" />
+            <div id="tableBlock" class="blocks">
+                <div class="blockHead">
+                    <h2 class="title" data-i18n="wordTable">联想词对应表</h2>
+                    <button onclick="toggleTable()" data-i18n="hideShow">显示/隐藏</button>
+                </div>
+                <button onclick="refreshTable()" class="tableButton" data-i18n="refresh">刷新</button>
+                <button onclick="clearAllData()" class="tableButton" style="background-color: rgba(255, 0, 0, 0.605);"
+                    data-i18n="clear">清空</button>
+            </div>
+        </main>
+
+        <div id="tableContainer">
+            <table id="letterTable"></table>
         </div>
 
-        <div id="trainingBlock" class="blocks">
+        <div id="letterSchema" class="blocks">
             <div class="blockHead">
-                <h2 class="title" data-i18n="practice">训练</h2>
-                <label for="modes"></label>
-                <select id="modes" name="modes">
-                    <optgroup label="通用" data-i18n="general">
-                        <option value="general" data-i18n="general-full">「通用」全字母</option>
-                        <option value="speffz" data-i18n="general-speffz">「通用」Speffz</option>
-                        <option value="chichu" data-i18n="general-chichu">「通用」全彳亍</option>
-                        <!-- <option value="customGeneral">自定义</option> -->
-                    </optgroup>
-                    <optgroup label="角块" data-i18n="corner">
-                        <option value="speffzCorner" data-i18n="c-speffz">「角块」Speffz</option>
-                        <option value="corner-chichu" data-i18n="c-chichu">「角块」彳亍</option>
-                        <option value="ff" data-i18n="c-maple">「角块」枫</option>
-                        <option value="customCorner" data-i18n="c-custom">「角块」自定义</option>
-                    </optgroup>
-                    <optgroup label="棱块" data-i18n="edge">
-                        <option value="speffzEdge" data-i18n="e-speffz">「棱块」Speffz</option>
-                        <option value="edge-chichu" data-i18n="e-chichu">「棱块」彳亍</option>
-                        <option value="customEdge" data-i18n="e-custom">「棱块」自定义</option>
-                    </optgroup>
+                <h2 class="title" data-i18n="customCode">自定义编码</h2>
+                <button onclick="toggleLetters()" data-i18n="hideShow">显示/隐藏</button>
+            </div>
+            <div id="lettersContent">
+                <p data-i18n="customPS">PS: 在輸入框里輸入字母(用空格隔開), 圖會隨時變化.
+                    可試試下面的編碼看效果</p>
+                <p id="eg">1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24</p>
+                <table class="coordinate">
+                    <tr>
+                        <td colspan="3" rowspan="3" style="border: 0;"></td>
+                        <td class="U" id="C3">-</td>
+                        <td class="U" id="E4">-</td>
+                        <td class="U" id="C6">-</td>
+                    </tr>
+                    <tr>
+                        <td class="U" id="E2">-</td>
+                        <td class="U"><b>U</b></td>
+                        <td class="U" id="E6">-</td>
+                    </tr>
+                    <tr>
+                        <td class="U" id="C0">-</td>
+                        <td class="U" id="E0">-</td>
+                        <td class="U" id="C9">-</td>
+                    </tr>
+
+                    <tr>
+                        <td class="L" id="C4">-</td>
+                        <td class="L" id="E3">-</td>
+                        <td class="L" id="C2">-</td>
+
+                        <td class="F" id="C1">-</td>
+                        <td class="F" id="E1">-</td>
+                        <td class="F" id="C11">-</td>
+
+                        <td class="R" id="C10">-</td>
+                        <td class="R" id="E7">-</td>
+                        <td class="R" id="C8">-</td>
+
+                        <td class="B" id="C7">-</td>
+                        <td class="B" id="E5">-</td>
+                        <td class="B" id="C5">-</td>
+                    </tr>
+                    <tr>
+                        <td class="L" id="E21">-</td>
+                        <td class="L"><b>L</b></td>
+                        <td class="L" id="E19">-</td>
+
+                        <td class="F" id="E18">-</td>
+                        <td class="F"><b>F</b></td>
+                        <td class="F" id="E16">-</td>
+
+                        <td class="R" id="E17">-</td>
+                        <td class="R"><b>R</b></td>
+                        <td class="R" id="E23">-</td>
+
+                        <td class="B" id="E22">-</td>
+                        <td class="B"><b>B</b></td>
+                        <td class="B" id="E20">-</td>
+                    </tr>
+                    <tr>
+                        <td class="L" id="C17">-</td>
+                        <td class="L" id="E11">-</td>
+                        <td class="L" id="C13">-</td>
+
+                        <td class="F" id="C14">-</td>
+                        <td class="F" id="E9">-</td>
+                        <td class="F" id="C22">-</td>
+
+                        <td class="R" id="C23">-</td>
+                        <td class="R" id="E15">-</td>
+                        <td class="R" id="C19">-</td>
+
+                        <td class="B" id="C20">-</td>
+                        <td class="B" id="E13">-</td>
+                        <td class="B" id="C16">-</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" rowspan="3" style="border: 0;"></td>
+                        <td class="D" id="C12">-</td>
+                        <td class="D" id="E8">-</td>
+                        <td class="D" id="C21">-</td>
+                    </tr>
+                    <tr>
+                        <td class="D" id="E10">-</td>
+                        <td class="D"><b>D</b></td>
+                        <td class="D" id="E14">-</td>
+                    </tr>
+                    <tr>
+                        <td class="D" id="C15">-</td>
+                        <td class="D" id="E12">-</td>
+                        <td class="D" id="C18">-</td>
+                    </tr>
+                </table>
+                <input type="text" id="customCorner" placeholder="自定义角块编码" onkeydown="checkEnter(event)"
+                    autocomplete="off" data-i18n="corner" />
+                <input type="text" id="customEdge" placeholder="自定义棱块编码" onkeydown="checkEnter(event)"
+                    autocomplete="off" data-i18n="edge" />
+
+                <table id="currentCustomCode">
+                    <caption style="font-weight: 600;" data-i18n="savedCode">Saved Code</caption>
+                    <tr>
+                        <td data-i18n="corner">角: </td>
+                        <td id="cDisplay">-</td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="edge">棱: </td>
+                        <td id="eDisplay">-</td>
+                    </tr>
+                </table>
+
+
+            </div>
+
+        </div>
+
+        <div class="blocks">
+            <div class="blockHead">
+                <h2 class="title" data-i18n="language">語言</h2>
+                <select id="langSwitcher">
+                    <option value="en">English</option>
+                    <option value="zh-TW">繁體中文</option>
+                    <option value="zh-CN">简体中文</option>
+                    <option value="ja">日本語</option>
                 </select>
             </div>
-
-            <p id="lastCode" data-i18n="last">上一个: </p>
-            <p id="currentCode" data-i18n="current">Current:--</p>
-            <div id="inputAndSubmit">
-                <input type="text" id="userInput" placeholder="请输入对应联想词" onkeydown="checkEnter(event)"
-                    autocomplete="off" data-i18n="inputPlaceholder" />
-                <button onclick="submitAnswer()" id="submit"><img src="./icon/rightArr.png" alt="submit"></button>
-            </div>
-        </div>
-
-        <div id="tableBlock" class="blocks">
-            <div class="blockHead">
-                <h2 class="title" data-i18n="wordTable">联想词对应表</h2>
-                <button onclick="toggleTable()" data-i18n="hideShow">显示/隐藏</button>
-            </div>
-            <button onclick="refreshTable()" class="tableButton" data-i18n="refresh">刷新</button>
-            <button onclick="clearAllData()" class="tableButton" style="background-color: rgba(255, 0, 0, 0.605);"
-                data-i18n="clear">清空</button>
-        </div>
-    </main>
-
-    <div id="tableContainer">
-        <table id="letterTable"></table>
-    </div>
-
-    <div id="letterSchema" class="blocks">
-        <div class="blockHead">
-            <h2 class="title" data-i18n="customCode">自定义编码</h2>
-            <button onclick="toggleLetters()" data-i18n="hideShow">显示/隐藏</button>
-        </div>
-        <div id="lettersContent">
-            <p data-i18n="customPS">PS: 在輸入框里輸入字母(用空格隔開), 圖會隨時變化.
-                可試試下面的編碼看效果</p>
-            <p id="eg">1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24</p>
-            <table class="coordinate">
-                <tr>
-                    <td colspan="3" rowspan="3" style="border: 0;"></td>
-                    <td class="U" id="C3">-</td>
-                    <td class="U" id="E4">-</td>
-                    <td class="U" id="C6">-</td>
-                </tr>
-                <tr>
-                    <td class="U" id="E2">-</td>
-                    <td class="U"><b>U</b></td>
-                    <td class="U" id="E6">-</td>
-                </tr>
-                <tr>
-                    <td class="U" id="C0">-</td>
-                    <td class="U" id="E0">-</td>
-                    <td class="U" id="C9">-</td>
-                </tr>
-
-                <tr>
-                    <td class="L" id="C4">-</td>
-                    <td class="L" id="E3">-</td>
-                    <td class="L" id="C2">-</td>
-
-                    <td class="F" id="C1">-</td>
-                    <td class="F" id="E1">-</td>
-                    <td class="F" id="C11">-</td>
-
-                    <td class="R" id="C10">-</td>
-                    <td class="R" id="E7">-</td>
-                    <td class="R" id="C8">-</td>
-
-                    <td class="B" id="C7">-</td>
-                    <td class="B" id="E5">-</td>
-                    <td class="B" id="C5">-</td>
-                </tr>
-                <tr>
-                    <td class="L" id="E21">-</td>
-                    <td class="L"><b>L</b></td>
-                    <td class="L" id="E19">-</td>
-
-                    <td class="F" id="E18">-</td>
-                    <td class="F"><b>F</b></td>
-                    <td class="F" id="E16">-</td>
-
-                    <td class="R" id="E17">-</td>
-                    <td class="R"><b>R</b></td>
-                    <td class="R" id="E23">-</td>
-
-                    <td class="B" id="E22">-</td>
-                    <td class="B"><b>B</b></td>
-                    <td class="B" id="E20">-</td>
-                </tr>
-                <tr>
-                    <td class="L" id="C17">-</td>
-                    <td class="L" id="E11">-</td>
-                    <td class="L" id="C13">-</td>
-
-                    <td class="F" id="C14">-</td>
-                    <td class="F" id="E9">-</td>
-                    <td class="F" id="C22">-</td>
-
-                    <td class="R" id="C23">-</td>
-                    <td class="R" id="E15">-</td>
-                    <td class="R" id="C19">-</td>
-
-                    <td class="B" id="C20">-</td>
-                    <td class="B" id="E13">-</td>
-                    <td class="B" id="C16">-</td>
-                </tr>
-                <tr>
-                    <td colspan="3" rowspan="3" style="border: 0;"></td>
-                    <td class="D" id="C12">-</td>
-                    <td class="D" id="E8">-</td>
-                    <td class="D" id="C21">-</td>
-                </tr>
-                <tr>
-                    <td class="D" id="E10">-</td>
-                    <td class="D"><b>D</b></td>
-                    <td class="D" id="E14">-</td>
-                </tr>
-                <tr>
-                    <td class="D" id="C15">-</td>
-                    <td class="D" id="E12">-</td>
-                    <td class="D" id="C18">-</td>
-                </tr>
-            </table>
-            <input type="text" id="customCorner" placeholder="自定义角块编码" onkeydown="checkEnter(event)"
-                autocomplete="off" data-i18n="corner"/>
-            <input type="text" id="customEdge" placeholder="自定义棱块编码" onkeydown="checkEnter(event)" autocomplete="off" data-i18n="edge"/>
-
-            <table id="currentCustomCode">
-                <caption style="font-weight: 600;" data-i18n="savedCode">Saved Code</caption>
-                <tr>
-                    <td data-i18n="corner">角: </td>
-                    <td id="cDisplay">-</td>
-                </tr>
-                <tr>
-                    <td data-i18n="edge">棱: </td>
-                    <td id="eDisplay">-</td>
-                </tr>
-            </table>
-
-            
-        </div>
-
-    </div>
-
-    <div class="blocks">
-        <div class="blockHead">
-            <h2 class="title" data-i18n="language">語言</h2>
-            <select id="langSwitcher">
-                <option value="en">English</option>
-                <option value="zh-TW">繁體中文</option>
-                <option value="zh-CN">简体中文</option>
-                <option value="ja">日本語</option>
-            </select>
-        </div>
-        <!-- <p>Multilingual features are still under development
+            <!-- <p>Multilingual features are still under development
             <br>多語言功能仍在開發中<br>多语言功能仍在开发中<br>多言語機能はまだ開発中です</p> -->
 
-    </div>
-
-    <footer>
-        <div class="blocks">
-            <h2 class="title" data-i18n="about">关于</h2>
-            <table>
-                <tr>
-                    <th data-i18n="latest">最新更新: </th>
-                    <td>Jun-29, 2025</td>
-                </tr>
-                <tr>
-                    <th data-i18n="myWCA">我的WCA主页: </th>
-                    <td><a href="https://www.worldcubeassociation.org/persons/2017FENG35" target="_blank">2017FENG35</a>
-                    </td>
-                </tr>
-                <tr>
-                    <th data-i18n="bilibili">我的B站: </th>
-                    <td><a href="https://space.bilibili.com/1035959192?spm_id_from=333.1007.0.0"
-                            target="_blank">溢水1735</a></td>
-                </tr>
-                <tr>
-                    <th data-i18n="bugReport">报错: </th>
-                    <td><a href="https://github.com/Cuber-Feng/BLD-memory/issues/new?title=Bug%20Report&body=Please%20describe%20the%20issue..."
-                            target="_blank">GitHub Issue</a></td>
-                </tr>
-            </table>
         </div>
-        <div id="occu" style="height: 15vh;"></div>
-        <p style="text-align: center;">© 2025 Maple Feng. All rights reserved.</p>
-    </footer>
 
-    <script src="js/script.js?20250612"></script>
-    <script src="js/languages.js?20250612"></script>
-    <script data-goatcounter="https://2017feng35.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+        <footer>
+            <div class="blocks">
+                <h2 class="title" data-i18n="about">关于</h2>
+                <table>
+                    <tr>
+                        <th data-i18n="latest">最新更新: </th>
+                        <td>Jun-29, 2025</td>
+                    </tr>
+                    <tr>
+                        <th data-i18n="myWCA">我的WCA主页: </th>
+                        <td><a href="https://www.worldcubeassociation.org/persons/2017FENG35"
+                                target="_blank">2017FENG35</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th data-i18n="bilibili">我的B站: </th>
+                        <td><a href="https://space.bilibili.com/1035959192?spm_id_from=333.1007.0.0"
+                                target="_blank">溢水1735</a></td>
+                    </tr>
+                    <tr>
+                        <th data-i18n="bugReport">报错: </th>
+                        <td><a href="https://github.com/Cuber-Feng/BLD-memory/issues/new?title=Bug%20Report&body=Please%20describe%20the%20issue..."
+                                target="_blank">GitHub Issue</a></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="occu" style="height: 15vh;"></div>
+            <p style="text-align: center;">© 2025 Maple Feng. All rights reserved.</p>
+        </footer>
 
+        <script src="js/script.js?20250612"></script>
+        <script src="js/languages.js?20250612"></script>
+        <script data-goatcounter="https://2017feng35.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+    </div>
 </body>
 
 </html>
