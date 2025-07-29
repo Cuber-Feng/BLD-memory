@@ -1,4 +1,7 @@
-const letters = Array.from({length: 26}, (_, i) => String.fromCharCode(65 + i));
+let lastTrainingMode;
+let lastLanguage;
+
+const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
 const ffLetters = [
     'A', 'B', 'C',
     'D', 'K', 'F',
@@ -117,7 +120,7 @@ function loadCustomLetter() {
 }
 
 function saveCustomLetters() {
-    let temp = {customCornerLetters, customEdgeLetters};
+    let temp = { customCornerLetters, customEdgeLetters };
     localStorage.setItem("customLetters", JSON.stringify(temp));
     console.log(`save`);
     console.log(temp);
@@ -473,6 +476,7 @@ function submitAnswer() {
 document.getElementById('modes').addEventListener('change', function (event) {
     nextCode(4);
     refreshTable();
+    storeTrainingMode(document.getElementById('modes').value);
 });
 
 function checkEnter(event) {
@@ -492,7 +496,7 @@ function clearAllData() {
 // 下载当前 localStorage 数据
 function downloadData() {
     const dataStr = localStorage.getItem("letterTableData") || "{}";
-    const blob = new Blob([dataStr], {type: "application/json"});
+    const blob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(blob);
 
     const a = document.createElement("a");
@@ -573,6 +577,12 @@ function goLight() {
 
 // 页面加载时
 window.onload = () => {
+    //选择上次的模式
+    lastTrainingMode = getTrainingModeFromLocal();
+    if (lastTrainingMode) {
+        console.log('last mode: ', lastTrainingMode);
+        document.getElementById('modes').value = lastTrainingMode;
+    }
     //自动加载表格
     const data = loadData();
     const l = loadCustomLetter();
