@@ -1,10 +1,18 @@
-// Save TrainingMode
+// Save TrainingMode & Language Preference
 function getTrainingModeFromLocal() {
     return localStorage.getItem("lastTrainingMode") || null;
 }
 
 function storeTrainingMode(mode) {
     localStorage.setItem("lastTrainingMode", mode);
+}
+
+function getLanguageSetFromLocal() {
+    return localStorage.getItem("preferLanguage") || null;
+}
+
+function storeLanguagePreference(lan) {
+    localStorage.setItem("preferLanguage", lan);
 }
 
 // 辅助函数, 判断两个数在整除一个数之后结果是否相等

@@ -1,7 +1,7 @@
 // 自動偵測語言
 function detectLang() {
-    const lang = navigator.language.toLowerCase();
-    if (lang.startsWith('zh-cn')) return 'zh-CN';
+    const lang = getLanguageSetFromLocal() || navigator.language.toLowerCase();
+    if (lang.startsWith('zh-cn')||lang.startsWith('zh-CN')) return 'zh-CN';
     if (lang.startsWith('zh-tw')) return 'zh-TW';
     if (lang.startsWith('zh-hk')) return 'zh-TW'; // 可自訂為 zh-HK
     if (lang.startsWith('zh')) return 'zh-TW';
@@ -58,5 +58,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('langSwitcher').addEventListener('change', (e) => {
         const selectedLang = e.target.value;
         loadLanguage(selectedLang);
+        storeLanguagePreference(selectedLang);
     });
 });
