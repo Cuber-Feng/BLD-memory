@@ -1,45 +1,6 @@
 let lastTrainingMode;
 let lastLanguage;
 
-const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
-const ffLetters = [
-    'A', 'B', 'C',
-    'D', 'K', 'F',
-    'G', 'H', 'J',
-    'W', 'M', 'N',
-    'L', 'P', 'Q',
-    'R', 'S', 'T',
-    'X', 'Y', 'Z'];
-
-const chichuLettersCorner = [
-    'A', 'B', 'C',
-    'D', 'E', 'F',
-    'G', 'H', 'I',
-    'W', 'M', 'N',
-    'O', 'P', 'Q',
-    'R', 'S', 'T',
-    'X', 'Y', 'Z'];
-
-const chichuLettersEdge = [
-    'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
-    'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
-
-const chichuLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
-    'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'];
-
-const speffzCorner = [
-    'D', 'I', 'F',
-    'A', 'E', 'R',
-    'B', 'Q', 'N',
-    'C', 'M', 'J',
-    'U', 'G', 'L',
-    'X', 'S', 'H',
-    'W', 'O', 'T',
-    'V', 'K', 'P'];
-
-const speffzEdge = [
-    'C', 'I', 'D', 'E', 'A', 'Q', 'B', 'M', 'U', 'K', 'X', 'G', 'W', 'S',
-    'V', 'O', 'J', 'P', 'L', 'F', 'R', 'H', 'T', 'N'];
 
 let customEdgeLetters = [];
 let customCornerLetters = [];
@@ -264,11 +225,6 @@ function toggleLetters() {
 let currentCode = null;
 let lastCode = null;
 //let hitFlag = 0; 标记这道题的回答情况(0: create, 1: hit, 2: add, 3: skip)
-
-// 辅助函数, 判断两个数在整除一个数之后结果是否相等
-function inSameRange(a, b, range) {
-    return Math.floor(a / range) === Math.floor(b / range);
-}
 
 function nextCode(hitFlag) {
     lastCode = currentCode;
@@ -612,7 +568,6 @@ const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
 mediaQuery.addEventListener('change', (e) => {
     const isDark = e.matches;
-    // 你可以在这里切换页面主题
     if (isDark) {
         goDark();
     } else {
